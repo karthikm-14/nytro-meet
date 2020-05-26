@@ -1,0 +1,37 @@
+@import './lib/@fortawesome/fontawesome-free/css/all.min.css';
+@import './lib/ionicons/css/ionicons.min.css';
+@import './assets/css/dashforge.css';
+@import './assets/css/dashforge.profile.css';
+@import './assets/css/skin.dark.css';
+@import './assets/css/metropolis.css';
+
+/* Custom Global styles */
+.nav-aside .nav-item .active.nav-link {
+    opacity: 1;
+    color: #0168fa;
+    font-weight: 500;
+}
+.nav-aside .nav-item .active svg {
+    color: #0168fa;
+    fill: rgba(1, 104, 250, 0.2);
+}
+.nav-aside .nav-item .active.nav-link::before {
+    opacity: 1;
+    visibility: visible;
+    border-left-color: #0168fa;
+}
+.solid-user {
+    fill: #97a3b9;;
+}
+/* Custom Typography styles */
+.tx-metropolis-semi-bold {
+    font-family: 'Metropolis Semi Bold', sans-serif; 
+}
+
+/* Custom Background color */
+.card-deck > .card {
+    background: #141c2b;
+}
+.event-expired > * {
+    color: #6a6a6a !important;
+}
