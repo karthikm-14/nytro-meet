@@ -12,10 +12,11 @@ import Sponsors from "./components/Sponsors/Sponsors";
 import SponsorProfile from "./components/Sponsors/SponsorProfile";
 
 
-const App = () => {
+const App = (props) => {
+
     return (
 		<Router>
-			<Menu />
+			<Menu keycloak={ props.keycloak }  />
 			<Switch>
 				<Route path="/" exact component={ Home } />
 				<Route path="/live-now" exact component={ LiveNow } />

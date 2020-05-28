@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1ad8235a.chunk.css",
+    "main.js": "/static/js/main.cf783fea.chunk.js",
+    "main.js.map": "/static/js/main.cf783fea.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8c465fa7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8c465fa7.js.map",
+    "static/css/2.bf0413c3.chunk.css": "/static/css/2.bf0413c3.chunk.css",
+    "static/js/2.48725baf.chunk.js": "/static/js/2.48725baf.chunk.js",
+    "static/js/2.48725baf.chunk.js.map": "/static/js/2.48725baf.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7c13d46d671a1cbd6340098e81ce60dd.js": "/precache-manifest.7c13d46d671a1cbd6340098e81ce60dd.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.bf0413c3.chunk.css.map": "/static/css/2.bf0413c3.chunk.css.map",
+    "static/css/main.1ad8235a.chunk.css.map": "/static/css/main.1ad8235a.chunk.css.map",
+    "static/js/2.48725baf.chunk.js.LICENSE.txt": "/static/js/2.48725baf.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/ionicons.96f1c901.woff2",
+    "static/media/slick-theme.css": "/static/media/slick.f97e3bbf.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8c465fa7.js",
+    "static/css/2.bf0413c3.chunk.css",
+    "static/js/2.48725baf.chunk.js",
+    "static/css/main.1ad8235a.chunk.css",
+    "static/js/main.cf783fea.chunk.js"
+  ]
+}

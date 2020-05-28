@@ -1,0 +1,70 @@
+[
+    {
+        "id": 1,
+        "stage-title": "sales stage",
+        "live-audience-count": "349",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec eleifend nibh. Aliqua",
+        "events": [
+            {
+                "id": 1,
+                "title": "Where are we? Where are we headed to?",
+                "description": "consectetur adipiscing elit. Fusce nec eleifend nibh.",
+                "sepakers": [
+                    "Kola Adesina",
+                    "Dr. Frank Richter"
+                ],
+                "start_date": "2020-05-05T16:00:00+05:30",
+                "end_date": "2020-05-05T17:00:00+05:30",
+                "status": "live",
+                "link": "https://www.youtube.com/watch?v=996OiexHze0"
+            },
+            {
+                "id": 2,
+                "title": "PhoenixBox Prologue - Learning from History",
+                "description": "consectetur adipiscing elit. Fusce nec eleifend nibh.",
+                "sepakers": [
+                    "Kola Adesina",
+                    "Dr. Frank Richter"
+                ],
+                "start_date": "2020-05-05T16:00:00+05:30",
+                "end_date": "2020-05-05T17:00:00+05:30",
+                "status": "upcoming",
+                "link": ""
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "stage-title": "networking stage",
+        "live-audience-count": "349",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec eleifend nibh. Aliqua",
+        "events": [
+            {
+                "id": 1,
+                "title": "Where are we? Where are we headed to?",
+                "description": "consectetur adipiscing elit. Fusce nec eleifend nibh.",
+                "sepakers": [
+                    "Kola Adesina",
+                    "Dr. Frank Richter"
+                ],
+                "start_date": "2020-05-05T16:00:00+05:30",
+                "end_date": "2020-05-05T17:00:00+05:30",
+                "status": "live",
+                "link": "https://www.youtube.com/watch?v=996OiexHze0"
+            },
+            {
+                "id": 2,
+                "title": "PhoenixBox Prologue - Learning from History",
+                "description": "consectetur adipiscing elit. Fusce nec eleifend nibh.",
+                "sepakers": [
+                    "Kola Adesina",
+                    "Dr. Frank Richter"
+                ],
+                "start_date": "2020-05-05T16:00:00+05:30",
+                "end_date": "2020-05-05T17:00:00+05:30",
+                "status": "upcoming",
+                "link": ""
+            }
+        ]
+    }
+]
