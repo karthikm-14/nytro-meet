@@ -8,8 +8,15 @@ const Menu = (props) => {
 
 	useEffect(() => {
 		props.keycloak.loadUserInfo().then((userInfo) => {
+            const fullName = userInfo.name.split(" ")
+            let initial = (fullName.length === 1) ? 
+                fullName[0].charAt(0) : 
+                `${fullName[0].charAt(0)}${fullName[fullName.length - 1].charAt(0)}`
 			setUserInfo({
-				name: userInfo.name, email: userInfo.email, id: userInfo.sub
+                name: userInfo.name, 
+                email: userInfo.email, 
+                id: userInfo.sub,
+                initial
 			})
 		})
     }, [])
@@ -18,7 +25,7 @@ const Menu = (props) => {
         props.keycloak.logout();
     }
 
-    let { name } = {...userInfo}
+    let { name, initial } = {...userInfo}
 
     return (
         <Fragment>
@@ -33,11 +40,11 @@ const Menu = (props) => {
                 <div className="aside-body">
                     <div className="aside-loggedin">
                         <div className="d-flex align-items-center justify-content-start">
-                            <a href="#" className="avatar"><img src="https://via.placeholder.com/500" className="rounded-circle" alt="" /></a>
+                            <a href="" className="avatar avatar-online">
+                                <span className="avatar-initial rounded-circle bg-dark">{ initial }</span>
+                            </a>
                             <div className="aside-alert-link">
-                            <a href="#" className="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
-                            <a href="#" className="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>
-                            <a href="#" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+                                <span onClick={ logout } data-toggle="tooltip" title="Sign out" className="tx-gray-600 mg-l-10 hover-tx-white" type="button"><i data-feather="log-out"></i></span>
                             </div>
                         </div>
                         <div className="aside-loggedin-user">
@@ -66,7 +73,7 @@ const Menu = (props) => {
                         </li>
                         <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" to="/live-now">
-                                <i data-feather="radio"></i> <span>Live now</span>
+                                <i data-feather="radio"></i> <span>Live now<span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span></span>
                             </NavLink>
                         </li>
                         <li className="nav-item">

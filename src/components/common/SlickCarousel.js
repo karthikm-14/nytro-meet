@@ -1,28 +1,16 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SpeakersList from './SpeakersList';
+import VideoModal from './VideoModal';
 
 
-const SlickCarousel = () => {
+const SlickCarousel = (props) => {
 
-    const items = []
+    const [data, setData] = useState(props.events)
+    const [modalEvent, setModalEvent] = useState(null)
 
-    for(let i=0;i<7;i++) {
-        items.push(
-            <a key={i} href="" className="row-xs">
-                <div className="slider-item">
-                    <div className="slider-icon">
-                        <img className="img-fluid rounded" src="https://via.placeholder.com/278x164" />
-                    </div>
-                    <h5 title="google" className="mg-y-10 tx-14 tx-semibold">Lorem Ipsum Dolor Sit Amet Egestas</h5>
-                    <p className="tx-12 tx-color-03 tx-semibold">James Allison</p>
-                </div>
-            </a>
-        )
-    }
-
-    
     const settings = {
         infinite: false,
         speed: 300,
@@ -54,10 +42,33 @@ const SlickCarousel = () => {
         ]
     };
 
+    const setEventHandler = (id) => {
+        let event = data.filter(event => event.id === id)
+        setModalEvent(event[0])
+    }
+
+    const items = data && data.map((event,i) => {
+        let { title, speakers } = { ...event, ...event.speakers }
+        return  <div key={i} className="row-xs cursor-pointer" data-toggle="modal" data-target="#videoModal" onClick={ () => setEventHandler(event.id) }>
+                    <div className="slider-item">
+                        <div className="slider-icon">
+                            <img className="img-fluid rounded" alt={ event.title } src={ event.eventBannerURL } />
+                        </div>
+                        <h5 title="google" className="mg-y-10 tx-14 tx-semibold">{ title }</h5>
+                        <p className="tx-12 tx-color-03 tx-semibold">
+                            <SpeakersList speakers={ speakers } />
+                        </p>
+                    </div>
+                </div>
+    })
+
     return (
-        <Slider {...settings}>
-            { items }
-        </Slider>
+        <Fragment>
+            <Slider {...settings}>
+                { items }
+            </Slider>
+            <VideoModal event={ modalEvent } />
+        </Fragment>
     )
 }
 

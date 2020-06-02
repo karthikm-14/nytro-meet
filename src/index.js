@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Keycloak from 'keycloak-js'
+import navbarAsideJS from './modules/navbar-aside'
+import navbarJS from './modules/navbar';
+
 
 //keycloak init options
 let initOptions = {
@@ -21,6 +24,8 @@ keycloak.init({ onLoad: initOptions.onLoad }).success((auth) => {
       window.location.reload();
   } else {
       console.info("Authenticated");
+      navbarAsideJS()
+      navbarJS()
   }
 
   //React Render

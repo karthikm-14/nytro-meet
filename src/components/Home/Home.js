@@ -1,11 +1,52 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import WatchNow from '../common/WatchNow'
 import EventCardView from '../common/EventCardView'
 import SlickCarousel from '../common/SlickCarousel'
 import Search from '../common/Search'
 
+import API from "../../utils/api";
+import { Link } from 'react-router-dom'
+
 
 const Home = () => {
+
+    const [data, setData] = useState(null)
+    const [liveEvents, setLiveEvents] = useState([])
+    const [doneEvents, setDoneEvents] = useState([])
+    const [activeEvent, setActiveEvent] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        API.get('user/jhi-events?eagerload=true')
+            .then(response => {
+                let doneEvents = []
+                let liveEvents = []
+                let activeEvent = {}
+                response.data.map((event) => {
+                    if(event.status === 'DONE') {
+                        doneEvents.push(event)
+                    } else if(event.status === 'LIVE') {
+                        if(!Object.keys(activeEvent).length) {
+                            activeEvent = event;
+                        }
+                        liveEvents.push(event)
+                    }
+                    return event
+                })
+            
+                setLiveEvents(liveEvents)
+                setDoneEvents(doneEvents)
+                setActiveEvent(activeEvent)
+                setIsLoading(false)
+            })
+            .catch(response => console.log(response));
+    }, [])
+
+    const setActiveEventHandler = (id) => {
+        let activeEvent = liveEvents.filter(event => event.id == id);
+        setActiveEvent({...activeEvent[0]})
+    }
+
     return (
         <div className="content ht-100v pd-0">
             <Search />
@@ -23,23 +64,56 @@ const Home = () => {
                     <div className="row row-xs">
                         <div className="col-lg-9">
                             <h6 className="mg-b-10 tx-16 tx-normal">Live Now</h6>
-                            <WatchNow />
+                            { !isLoading ? 
+                                <WatchNow event={ activeEvent } /> :  
+                                <div className="live-now-wrapper bg-gray-400 col-xs-6 rounded pos-relative">
+                                    <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
+                                        <div className="line"></div>
+                                        <div className="line"></div>
+                                    </div>
+                                </div>
+                            }
                         </div>
                         <div className="col-lg-3 mg-t-10 mg-lg-t-0">
                             <div className="row row-xs">
                                 <div className="col-12">
-                                    <h6 className="mg-b-10 tx-16 tx-normal">Today</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <h6 className="mg-b-10 tx-16 tx-normal">Today</h6>
+                                        <Link to={ '/schedule' }>See All</Link>
+                                    </div>
                                     <div className="row row-xs">
-                                        <EventCardView itemsCount={ 4 } colSm={ 6 } colLg={ 12 } />
+                                        { !isLoading ? 
+                                            <EventCardView 
+                                                events={ liveEvents }
+                                                activeEvent = { activeEvent }
+                                                setActiveEventHandler = { (id) => setActiveEventHandler(id) }
+                                                colSm={ 6 } colLg={ 12 } 
+                                            /> : 
+                                            <div className="col-12">
+                                                <div className="ht-120 bg-gray-400 col-xs-6 rounded pos-relative mg-b-10">
+                                                    <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
+                                                        <div className="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="ht-120 bg-gray-400 col-xs-6 rounded pos-relative mg-b-10">
+                                                    <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
+                                                        <div className="line"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="slider-content" className="mg-t-30">
-                        <h6 className="mg-b-10 tx-16 tx-normal">In Case You Missed it...</h6>
-                        <SlickCarousel />
-                    </div>
+                    { !isLoading && doneEvents ?
+                        <div id="slider-content" className="mg-t-30">
+                            <h6 className="mg-b-10 tx-16 tx-normal">In Case You Missed it...</h6>
+                            <SlickCarousel events={ doneEvents } />
+                        </div> :
+                        null
+                    }
                 </div>
             </div>
         </div>

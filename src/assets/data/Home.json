@@ -1,37 +1,201 @@
 [
     {
         "id": 1,
-        "title": "Where are we? Where are we headed to?",
-        "sepakers": [
-            "Kola Adesina",
-            "Dr. Frank Richter"
+        "title": "payment quantifying",
+        "description": "Shoes",
+        "startDate": "2020-05-26T00:05:53Z",
+        "endDate": "2020-05-25T07:21:32Z",
+        "status": "DONE",
+        "stage": "Sales",
+        "eventBannerURL": "Australia",
+        "sponsors": [
+            {
+                "id": 1,
+                "name": "Credit Card Account Money Market Account",
+                "about": "Kuwaiti Dinar",
+                "website": "Business-focused optimize Versatile",
+                "email": "Delfina_Hickle@yahoo.com"
+            },
+            {
+                "id": 2,
+                "name": "Turkish Lira",
+                "about": "Chips",
+                "website": "communities Liaison Coordinator",
+                "email": "Karley10@yahoo.com"
+            }
         ],
-        "start_date": "2020-05-05T16:00:00+05:30",
-        "end_date": "2020-05-05T17:00:00+05:30",
-        "status": "live",
-        "link": "https://www.youtube.com/watch?v=996OiexHze0"
+        "speakers": [
+            {
+                "id": 1,
+                "name": "Credit Card Account",
+                "about": "Fresh",
+                "company": "Investment Account card",
+                "email": "Laron96@hotmail.com"
+            },
+            {
+                "id": 2,
+                "name": "Implemented Ergonomic database",
+                "about": "Oman Plastic Rustic",
+                "company": "knowledge base",
+                "email": "Madyson69@hotmail.com"
+            }
+        ],
+        "eventOrganizer": null
     },
     {
         "id": 2,
-        "title": "PhoenixBox Prologue - Learning from History",
-        "sepakers": [
-            "Kola Adesina",
-            "Dr. Frank Richter"
+        "title": "Facilitator Networked tan",
+        "description": "Direct optimizing streamline",
+        "startDate": "2020-05-25T13:09:21Z",
+        "endDate": "2020-05-25T14:18:26Z",
+        "status": "LIVE",
+        "stage": "Sales",
+        "eventBannerURL": "mobile parsing",
+        "sponsors": [
+            {
+                "id": 1,
+                "name": "Credit Card Account Money Market Account",
+                "about": "Kuwaiti Dinar",
+                "website": "Business-focused optimize Versatile",
+                "email": "Delfina_Hickle@yahoo.com"
+            }
         ],
-        "start_date": "2020-05-05T16:00:00+05:30",
-        "end_date": "2020-05-05T17:00:00+05:30",
-        "status": "upcoming",
-        "link": ""
+        "speakers": [
+            {
+                "id": 1,
+                "name": "Credit Card Account",
+                "about": "Fresh",
+                "company": "Investment Account card",
+                "email": "Laron96@hotmail.com"
+            },
+            {
+                "id": 3,
+                "name": "Uruguay Avon",
+                "about": "Re-engineered Practical Metal Table TCP",
+                "company": "payment",
+                "email": "Zander_Balistreri@gmail.com"
+            }
+        ],
+        "eventOrganizer": null
     },
     {
         "id": 3,
-        "title": "Open Society & Networking Opportunities",
-        "sepakers": [
-            "James Charles"
+        "title": "backing up morph",
+        "description": "generating Directives Awesome Fresh Computer",
+        "startDate": "2020-05-25T06:23:15Z",
+        "endDate": "2020-05-25T02:59:56Z",
+        "status": "DRAFT",
+        "stage": "Sales",
+        "eventBannerURL": "homogeneous",
+        "sponsors": [
+            {
+                "id": 3,
+                "name": "Checking Account invoice",
+                "about": "Bahamas bandwidth Kenya",
+                "website": "Sports",
+                "email": "Jaunita_Will@hotmail.com"
+            }
         ],
-        "start_date": "2020-05-05T16:00:00+05:30",
-        "end_date": "2020-05-05T17:00:00+05:30",
-        "status": "completed",
-        "link": "https://www.youtube.com/watch?v=996OiexHze0"
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 4,
+        "title": "Paradigm Paradigm",
+        "description": "holistic Phased",
+        "startDate": "2020-05-25T22:15:59Z",
+        "endDate": "2020-05-25T11:56:44Z",
+        "status": "DONE",
+        "stage": "Sales",
+        "eventBannerURL": "Wooden",
+        "sponsors": [
+            {
+                "id": 4,
+                "name": "generate Down-sized",
+                "about": "Investor Representative",
+                "website": "Computers asymmetric",
+                "email": "Holden_Haley36@gmail.com"
+            }
+        ],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 5,
+        "title": "back up best-of-breed Rhode Island",
+        "description": "4th generation",
+        "startDate": "2020-05-25T20:02:51Z",
+        "endDate": "2020-05-25T18:12:36Z",
+        "status": "LIVE",
+        "stage": "Sales",
+        "eventBannerURL": "Granite well-modulated",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 6,
+        "title": "open-source",
+        "description": "users",
+        "startDate": "2020-05-25T11:32:02Z",
+        "endDate": "2020-05-25T13:08:36Z",
+        "status": "DONE",
+        "stage": "Marketing",
+        "eventBannerURL": "Advanced",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 7,
+        "title": "6th generation THX",
+        "description": "monitoring Savings Account pink",
+        "startDate": "2020-05-25T03:19:42Z",
+        "endDate": "2020-05-25T13:40:42Z",
+        "status": "DONE",
+        "stage": "Marketing",
+        "eventBannerURL": "Libyan Dinar index",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 8,
+        "title": "auxiliary Cotton programming",
+        "description": "blue",
+        "startDate": "2020-05-25T07:58:29Z",
+        "endDate": "2020-05-26T00:36:03Z",
+        "status": "DONE",
+        "stage": "Sales",
+        "eventBannerURL": "Adaptive Specialist Solomon Islands Dollar",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 9,
+        "title": "digital user-centric Credit Card Account",
+        "description": "Dynamic New Mexico Licensed",
+        "startDate": "2020-05-25T14:09:34Z",
+        "endDate": "2020-05-25T11:57:18Z",
+        "status": "LIVE",
+        "stage": "Sales",
+        "eventBannerURL": "bypass engineer Tuna",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
+    },
+    {
+        "id": 10,
+        "title": "Malaysian Ringgit Web",
+        "description": "Strategist Cambridgeshire",
+        "startDate": "2020-05-25T10:31:10Z",
+        "endDate": "2020-05-25T12:43:14Z",
+        "status": "LIVE",
+        "stage": "Sales",
+        "eventBannerURL": "feed calculate",
+        "sponsors": [],
+        "speakers": [],
+        "eventOrganizer": null
     }
 ]

@@ -23,9 +23,17 @@
 .solid-user {
     fill: #97a3b9;;
 }
+.event-live {
+    background-color: #f43838;
+    box-shadow: 0 0 3px 2px #f43838;
+    vertical-align: middle;
+}
 /* Custom Typography styles */
 .tx-metropolis-semi-bold {
     font-family: 'Metropolis Semi Bold', sans-serif; 
+}
+.hover-tx-white:hover {
+    color: white;
 }
 
 /* Custom Background color */
@@ -34,4 +42,12 @@
 }
 .event-expired > * {
     color: #6a6a6a !important;
+}
+
+/* Hover effect */
+.bg-dark-hover:hover {
+    background-color: #3b4863 !important;
+}
+.cursor-pointer {
+    cursor: pointer;
 }
