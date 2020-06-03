@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
+import SpeakersList from './SpeakersList'
 
 
-const StreamingInfo = () => {
+const StreamingInfo = (props) => {
+
+    let { description, speakers } = {...props.event}
+
     return (
         <Fragment>
             <ul className="nav nav-line">
@@ -11,19 +15,18 @@ const StreamingInfo = () => {
                 <li className="nav-item">
                     <a className="nav-link" id="speakers-tab" data-toggle="tab" href="#speakers" role="tab" aria-controls="speakers" aria-selected="false">Speakers</a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" id="attachments-tab" data-toggle="tab" href="#attachments" role="tab" aria-controls="attachments" aria-selected="false">Attachments</a>
-                </li>
+                </li> */}
             </ul>
             <div className="tab-content pd-l-0 pd-t-20 pd-r-20 pd-b-20" id="myTabContent">
                 <div className="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec eleifend nibh. Aliquam dictum turpis in arcu lobortis dictum. Etiam euismod cursus neque ut posuere. Etiam ut lectus leo. Sed molestie rhoncus velit eget pellentesque. Cras et nullam.</p>
+                    <p>{ description }</p>
                 </div>
                 <div className="tab-pane fade" id="speakers" role="tabpanel" aria-labelledby="speakers-tab">
-                    <h6>speakers</h6>
-                    <p>...</p>
+                    <SpeakersList expand={ true } speakers={ speakers } />
                 </div>
-                <div className="tab-pane fade bd bd-2 rounded-5" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
+                {/* <div className="tab-pane fade bd bd-2 rounded-5" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
                     <div className="card card-body">
                         <div className="media">
                             <span className="tx-color-04"><i className="fas fa-file-pdf tx-30 mg-t-5" aria-hidden="true"></i></span>
@@ -35,7 +38,7 @@ const StreamingInfo = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Fragment>
     )

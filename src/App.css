@@ -28,6 +28,9 @@
     box-shadow: 0 0 3px 2px #f43838;
     vertical-align: middle;
 }
+.card-img-overlay {
+    background-image: linear-gradient(to top right, #000 25%, rgba(255, 255, 255, 0));
+}
 /* Custom Typography styles */
 .tx-metropolis-semi-bold {
     font-family: 'Metropolis Semi Bold', sans-serif; 
@@ -50,4 +53,14 @@
 }
 .cursor-pointer {
     cursor: pointer;
+}
+/* Custom height */
+.ht-480 {
+    height: 480px;
+}
+.ht-112 {
+    height: 112px
+}
+.ht-164 {
+    height: 164px;
 }

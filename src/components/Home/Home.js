@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 const Home = () => {
 
     const [data, setData] = useState(null)
-    const [liveEvents, setLiveEvents] = useState([])
+    const [todayEvents, setTodayEvents] = useState([])
     const [doneEvents, setDoneEvents] = useState([])
     const [activeEvent, setActiveEvent] = useState({})
     const [isLoading, setIsLoading] = useState(true)
@@ -20,21 +20,26 @@ const Home = () => {
         API.get('user/jhi-events?eagerload=true')
             .then(response => {
                 let doneEvents = []
-                let liveEvents = []
+                let todayEvents = []
                 let activeEvent = {}
                 response.data.map((event) => {
+
+                    let eventStartDate = new Date(event.startDate).getDate()
+                    let todayDate = new Date().getDate()
+
                     if(event.status === 'DONE') {
                         doneEvents.push(event)
-                    } else if(event.status === 'LIVE') {
+                    // } else if(eventStartDate === todayDate) { // This the actual code 
+                    } else if(event.status === 'LIVE') { // static code 
+                        todayEvents.push(event)
                         if(!Object.keys(activeEvent).length) {
                             activeEvent = event;
                         }
-                        liveEvents.push(event)
-                    }
+                    } 
                     return event
                 })
             
-                setLiveEvents(liveEvents)
+                setTodayEvents(todayEvents)
                 setDoneEvents(doneEvents)
                 setActiveEvent(activeEvent)
                 setIsLoading(false)
@@ -43,7 +48,7 @@ const Home = () => {
     }, [])
 
     const setActiveEventHandler = (id) => {
-        let activeEvent = liveEvents.filter(event => event.id == id);
+        let activeEvent = todayEvents.filter(event => event.id == id);
         setActiveEvent({...activeEvent[0]})
     }
 
@@ -84,7 +89,7 @@ const Home = () => {
                                     <div className="row row-xs">
                                         { !isLoading ? 
                                             <EventCardView 
-                                                events={ liveEvents }
+                                                events={ todayEvents }
                                                 activeEvent = { activeEvent }
                                                 setActiveEventHandler = { (id) => setActiveEventHandler(id) }
                                                 colSm={ 6 } colLg={ 12 } 

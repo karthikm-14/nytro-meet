@@ -48,11 +48,13 @@ const SlickCarousel = (props) => {
     }
 
     const items = data && data.map((event,i) => {
-        let { title, speakers } = { ...event, ...event.speakers }
+        let { title, speakers, eventBannerURL } = { ...event, ...event.speakers }
+        eventBannerURL = eventBannerURL ? eventBannerURL : '';
         return  <div key={i} className="row-xs cursor-pointer" data-toggle="modal" data-target="#videoModal" onClick={ () => setEventHandler(event.id) }>
                     <div className="slider-item">
-                        <div className="slider-icon">
-                            <img className="img-fluid rounded" alt={ event.title } src={ event.eventBannerURL } />
+                        <div 
+                            className="w-100 rounded-5 ht-164" 
+                            style={{backgroundImage: `url(${eventBannerURL})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
                         </div>
                         <h5 title="google" className="mg-y-10 tx-14 tx-semibold">{ title }</h5>
                         <p className="tx-12 tx-color-03 tx-semibold">

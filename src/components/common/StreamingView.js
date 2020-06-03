@@ -1,15 +1,19 @@
 import React, { Fragment } from 'react'
 import StreamingInfo from './StreamingInfo'
+import SpeakersList from './SpeakersList'
 
 
-const StreamingView = () => {
+const StreamingView = (props) => {
+    
     return (
         <Fragment>
             <img alt="live-now" className="w-100 rounded-5 card-img" src="/assets/images/watch-now-bg.jpg" />
             <div className="card-body pl-0 pd-t-35">
-                <h6 className="card-title tx-bold tx-24">Catalyzing the Benefits of Globalization </h6>
-                <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">Kola Adesina and 5 More</p>
-                <StreamingInfo />
+                <h6 className="card-title tx-bold tx-24">{ props.event.title }</h6>
+                <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">
+                    <SpeakersList speakers={ props.event.speakers } />
+                </p>
+                <StreamingInfo event={props.event} />
             </div>
         </Fragment>
     )

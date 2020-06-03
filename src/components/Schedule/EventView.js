@@ -7,10 +7,13 @@ import SpeakersList from '../common/SpeakersList'
 const EventView = (props) => {
 
     const items = props.events.map(event => {
+        let { eventBannerURL } = event
+        eventBannerURL = eventBannerURL ? eventBannerURL : '';
         return <div className="pd-20" key={event.id}>
-                    <div className="media align-items-center">
-                        <div className="wd-70 ht-70 d-flex align-items-center mg-r-10">
-                            <img src={ event.eventBannerURL ? event.eventBannerURL : 'https://via.placeholder.com/68' } className="img-fluid rounded" alt="" />
+                    <div className="media">
+                        <div 
+                            className="wd-70 ht-70 d-flex align-items-center mg-r-10 rounded" 
+                            style={{backgroundImage: `url(${eventBannerURL})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
                         </div>
                         <div className={`media-body lh-normal ${event.status==='DONE' ? 'event-expired': ''}`}>
                             <h5 className="tx-13 lh-2">

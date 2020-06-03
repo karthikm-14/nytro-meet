@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import StreamingInfo from './StreamingInfo'
 
 const VideoModal = (props) => {
-
+    
     return (
         <div className="modal fade" id="videoModal" tabIndex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
+            <div className="modal-dialog-centered modal-dialog modal-lg" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="videoModalLabel">{ props.event ? props.event.title : null }</h5>
@@ -13,14 +14,23 @@ const VideoModal = (props) => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <video width="320" height="240" autoPlay controls>
-                        <source src={ props.event ? props.event.link : null } type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                    {
+                        props.event ?
+                        <video width="100%" height="auto" autoPlay controls>
+                            <source src={ props.event.link } type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video> :
+                        null
+                    }   
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Save changes</button>
+                    {
+                        props.event ? 
+                            <div className="card-body pd-0 ">
+                                <StreamingInfo event={props.event} />
+                            </div> :
+                            null
+                    }
                 </div>
                 </div>
             </div>

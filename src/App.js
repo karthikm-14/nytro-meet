@@ -20,7 +20,7 @@ const App = (props) => {
 			<Switch>
 				<Route path="/" exact component={ Home } />
 				<Route path="/live-now" exact component={ LiveNow } />
-				<Route path="/live-now/:stageEvents" exact component={ LiveAndUpcoming } />
+				<Route path="/live-now/:stage" exact component={ LiveAndUpcoming } />
 				<Route path="/schedule" exact component={ Schedule } />
 				<Route path="/lounge" exact component={ Lounge } />
 				<Route path="/sponsors" exact component={ Sponsors } />

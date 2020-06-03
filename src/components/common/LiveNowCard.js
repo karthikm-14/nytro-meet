@@ -8,7 +8,7 @@ const liveNowCard = (props) => {
 
     const items = data.map(item => {
         return <div key={ item.id } className="col-xs-12 col-md-6 mg-b-10">
-                    <Link to={ '/live-now/marketing' }>
+                    <Link to={ `/live-now/${item['stage-title']}` }>
                         <div className="card bg-dark text-white live-now-wrapper">
                             <img alt="live-now" className="h-100 rounded-5 img-fluid" src="/assets/images/watch-now-bg.jpg" />
                             <div className="card-img-overlay">

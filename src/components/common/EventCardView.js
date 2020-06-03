@@ -7,13 +7,13 @@ import SpeakersList from './SpeakersList'
 const EventCardView = (props) => {
 
     const [data, setData] = useState(props.events)
-
+    
     const items = data && data.map((event,i) => {
         let { startDate, title, speakers } = { ...event, ...event.speakers }
 
-        return <div key={event.id} className={`col-sm-${props.colSm} col-md-${props.colMd} col-lg-${props.colLg} col-xl-${props.colXl}`} >
+        return  <div key={event.id} className={`col-sm-${props.colSm} col-md-${props.colMd} col-lg-${props.colLg} col-xl-${props.colXl}`} >
                     <div 
-                        className={`card card-body mg-b-10 tx-metropolis-semi-bold bg-dark-hover pointer cursor-pointer ${ event.id === props.activeEvent.id ? 'bg-dark' : ''} `}
+                        className={`ht-112 card card-body mg-b-10 tx-metropolis-semi-bold bg-dark-hover pointer cursor-pointer ${ event.id === props.activeEvent.id ? 'bg-dark' : ''} `}
                         onClick={ () => props.setActiveEventHandler(event.id) }
                     >
                         <small className="lh-normal tx-14 tx-color-03">
@@ -29,7 +29,7 @@ const EventCardView = (props) => {
 
     return (
         <Fragment>
-            { items }
+            { items.length ? items : 'No Streams today...' }
         </Fragment>
     )
 }
