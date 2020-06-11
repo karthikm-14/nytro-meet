@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom'
 const liveNowCard = (props) => {
 
     const data = [...props.data];
-
+    
     const items = data.map(item => {
+        let banner_url = item.banner_url ? item.banner_url : "/assets/images/watch-now-bg.jpg";
         return <div key={ item.id } className="col-xs-12 col-md-6 mg-b-10">
                     <Link to={ `/live-now/${item['stage-title']}` }>
                         <div className="card bg-dark text-white live-now-wrapper">
-                            <img alt="live-now" className="h-100 rounded-5 img-fluid" src="/assets/images/watch-now-bg.jpg" />
+                            <img alt="live-now" className="h-100 rounded-5 img-fluid" src={banner_url} />
                             <div className="card-img-overlay">
                             <div className="pos-absolute b-20 l-20 r-20">
                                 <span className="btn-danger d-inline-flex align-items-center p-0 px-2 tx-12 tx-bold mg-b-10">

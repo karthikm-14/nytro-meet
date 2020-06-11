@@ -22,8 +22,8 @@ const Schedule = () => {
         let month = myDate.getMonth();
         let year = myDate.getFullYear();
         let fromToday = year + "-" + formatDate(month + 1) + "-" + formatDate(date);
-        getData('2020-05-25') // this should be fromToday
-        getStages('2020-05-25')
+        getData(fromToday)
+        getStages(fromToday)
     }, [])
 
     const getData = (date) => {

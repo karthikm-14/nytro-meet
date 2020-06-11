@@ -15,7 +15,7 @@ const LiveAndUpcoming = (props) => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        API.get('user/jhi-live-events-by-stage?eagerload=true&stage=Sales')
+        API.get(`user/jhi-live-events-by-stage?eagerload=true&stage=${props.match.params.stage}`)
             .then(response => {
                 let activeEvent = {}
                 let draftEvents = []
@@ -41,7 +41,7 @@ const LiveAndUpcoming = (props) => {
     }, [])
 
     const setActiveEventHandler = (id) => {
-        let activeEvent = stage.events.filter(event => event.id == id);
+        let activeEvent = stage.events.filter(event => event.id === id);
         setActiveEvent({...activeEvent[0]})
     }
 
@@ -64,7 +64,7 @@ const LiveAndUpcoming = (props) => {
                         <div className="col-lg-3">
                             <h6 className="mg-b-10 tx-16 tx-normal">Live Now</h6>
                             {
-                                !isLoading ? <EventCardView  
+                                !isLoading && liveEvents.length ? <EventCardView  
                                                 activeEvent={ activeEvent } 
                                                 events={ [liveEvents[0]] } 
                                                 setActiveEventHandler = { (id) => setActiveEventHandler(id) }
@@ -77,7 +77,7 @@ const LiveAndUpcoming = (props) => {
                                     <h6 className="mg-b-10 tx-16 tx-normal">Coming Up Next...</h6>
                                     <div className="row row-xs">
                                         {
-                                            !isLoading ? <EventCardView  
+                                            !isLoading && draftEvents.length ? <EventCardView  
                                                             activeEvent={ activeEvent } 
                                                             events={ draftEvents } 
                                                             setActiveEventHandler = { (id) => setActiveEventHandler(id) }
@@ -111,7 +111,7 @@ const LiveAndUpcoming = (props) => {
                     <div className="row row-xs mg-t-20">
                         <div className="col-lg-8">
                             {
-                                !isLoading ?
+                                !isLoading && liveEvents.length ?
                                     <StreamingView event={ activeEvent } /> :
                                     null
                             }

@@ -1,0 +1,52 @@
+{
+    "attendees": [
+        {
+            "id": 1,
+            "eventBannerURL": "...",
+            "iconURL": "...",
+            "name": "Zhen Juan Chiu",
+            "position": "software engineer",
+            "company": "Regalix",
+            "contact": {
+                "mail": "zhen@regalix-inc.company",
+                "phone": "123456789"
+            }
+        },
+        {
+            "id": 2,
+            "eventBannerURL": "...",
+            "iconURL": "...",
+            "name": "Zhen Juan Chiu",
+            "position": "software engineer",
+            "company": "Regalix",
+            "contact": {
+                "mail": "zhen@regalix-inc.company",
+                "phone": "123456789"
+            }
+        }
+    ],
+    "positions": [
+        {
+            "id": 1,
+            "title": "Software Engineer",
+            "count": 30
+        },
+        {
+            "id": 2,
+            "title": "Product Representative",
+            "count": 12
+        }
+    ],
+    "locations": [
+        {
+            "id": 1,
+            "title": "San Francisco, California",
+            "count": 30
+        },
+        {
+            "id": 2,
+            "title": "Austin, Texas",
+            "count": 12
+        }
+    ]
+}
