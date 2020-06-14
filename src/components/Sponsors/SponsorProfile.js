@@ -23,10 +23,10 @@ const SponsorProfile = () => {
                         {/* Left */}
                         <div className="profile-sidebar profile-sidebar-two pd-lg-r-15">
                             <div className="row">
-                                <div className="col-sm-3 col-md-2 col-lg">
+                                <div className="col-sm-3 col-md-2 col-lg-12">
                                     <div className="avatar avatar-xxl avatar-online"><img src="https://via.placeholder.com/500" className="rounded-circle" alt="" /></div>
                                 </div>    
-                                <div className="col-sm-8 col-md-7 col-lg mg-t-20 mg-sm-t-0 mg-lg-t-25">
+                                <div className="col-sm-8 col-md-7 col-lg-12 mg-t-20 mg-sm-t-0 mg-lg-t-25">
                                     <h5 className="mg-b-2 tx-spacing--1">Regalix Inc.</h5>
                                     <p className="tx-color-03 tx-semibold mg-b-5">Premiere Sponsor</p>
                                     <a href="https://regalix.com" target="_blank" className="d-block mg-b-25">www.regalix.com</a>
@@ -35,7 +35,7 @@ const SponsorProfile = () => {
                                     </div>
                                     <p className="tx-13 tx-color-02 mg-b-25">Regalix is a global leader partnering with companies on sales enablement, revenue operations and thought-leadership.</p>
                                 </div>    
-                                <div className="col-sm-6 col-md-5 col-lg mg-t-20">
+                                <div className="col-sm-6 col-md-5 col-lg-12 mg-t-20">
                                     <label className="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Social Links</label>
                                         <ul className="list-unstyled profile-info-list">
                                         <li><i data-feather="globe"></i> <a href="">www.regalix.com</a></li>

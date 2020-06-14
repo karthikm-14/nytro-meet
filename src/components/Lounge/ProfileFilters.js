@@ -34,7 +34,8 @@ const ProfileFilters = (props) => {
 
     const specializationList = !isSpecializationLoading && specializationData.length ? 
                                     specializationData.map((specialization,i) => {
-                                        return  <div onClick={ () => props.getAttendeesData({'by':'jobPosition','text':specialization.position}) } key={i} className="nav-link">
+                                        let active = props.filterByPositionName === specialization.position ? 'active' : null;
+                                        return  <div className={`${active} nav-link cursor-pointer`} onClick={ () => props.setFilterByPositionName(specialization.position) } key={i}>
                                                     <span>{ specialization.position }</span> <span className="badge">{ specialization.totalAttendees }</span>
                                                 </div>
                                     }) :
@@ -42,7 +43,8 @@ const ProfileFilters = (props) => {
 
     const companyList = !isCompanyLoading && companyData.length ? 
                                     companyData.map((company,i) => {
-                                        return  <div onClick={ () => props.getAttendeesData({'by':'compnay','text':company.company}) } key={i} className="nav-link">
+                                        let active = props.filterByCompanyName === company.company ? 'active' : null;
+                                        return  <div className={`${active} nav-link cursor-pointer`} onClick={ () => props.setFilterByCompanyName(company.company) } key={i}>
                                                     <span>{ company.company }</span> <span className="badge">{ company.totalAttendees }</span>
                                                 </div>
                                     }) :

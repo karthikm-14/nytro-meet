@@ -30,7 +30,7 @@ const Home = () => {
                     if(event.status === 'DONE') {
                         doneEvents.push(event)
                     // } else if(eventStartDate === todayDate) { // This the actual code 
-                    } else if(event.status === 'LIVE') { // static code 
+                    } else if(eventStartDate === todayDate) { // static code 
                         todayEvents.push(event)
                         if(!Object.keys(activeEvent).length) {
                             activeEvent = event;
@@ -38,7 +38,6 @@ const Home = () => {
                     } 
                     return event
                 })
-            
                 setTodayEvents(todayEvents)
                 setDoneEvents(doneEvents)
                 setActiveEvent(activeEvent)

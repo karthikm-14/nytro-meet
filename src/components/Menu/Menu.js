@@ -3,38 +3,16 @@ import { NavLink } from 'react-router-dom'
 
 
 const Menu = (props) => {
-
-    const [userInfo, setUserInfo] = useState({})
-
-	useEffect(() => {
-		props.keycloak.loadUserInfo().then((userInfo) => {
-            const fullName = userInfo.name.split(" ")
-            let initial = (fullName.length === 1) ? 
-                fullName[0].charAt(0) : 
-                `${fullName[0].charAt(0)}${fullName[fullName.length - 1].charAt(0)}`
-			setUserInfo({
-                name: userInfo.name, 
-                email: userInfo.email, 
-                id: userInfo.sub,
-                initial
-			})
-		})
-    }, [])
-    
-    const logout = () => {
-        props.keycloak.logout();
-    }
-
-    let { name, initial } = {...userInfo}
-
+    let { name, initial , roles} = {...props.userInfo}
+    let showStage = roles ? roles.includes('moderator') || roles.includes('panelist') : null
     return (
         <Fragment>
             <aside className="aside aside-fixed">
                 <div className="aside-header">
                     <a href="/" className="aside-logo">dash<span>forge</span></a>
                     <a href="#" className="aside-menu-link">
-                    <i data-feather="menu"></i>
-                    <i data-feather="x"></i>
+                        <i data-feather="menu"></i>
+                        <i data-feather="x"></i>
                     </a>
                 </div>
                 <div className="aside-body">
@@ -44,7 +22,7 @@ const Menu = (props) => {
                                 <span className="avatar-initial rounded-circle bg-dark">{ initial }</span>
                             </a>
                             <div className="aside-alert-link">
-                                <span onClick={ logout } data-toggle="tooltip" title="Sign out" className="tx-gray-600 mg-l-10 hover-tx-white" type="button"><i data-feather="log-out"></i></span>
+                                <span onClick={ () => props.logout() } data-toggle="tooltip" title="Sign out" className="tx-gray-600 mg-l-10 hover-tx-white" type="button"><i data-feather="log-out"></i></span>
                             </div>
                         </div>
                         <div className="aside-loggedin-user">
@@ -60,7 +38,7 @@ const Menu = (props) => {
                             <li className="nav-item"><a href="#" className="nav-link"><i data-feather="user"></i> <span>View Profile</span></a></li>
                             <li className="nav-item"><a href="#" className="nav-link"><i data-feather="settings"></i> <span>Account Settings</span></a></li>
                             <li className="nav-item"><a href="#" className="nav-link"><i data-feather="help-circle"></i> <span>Help Center</span></a></li>
-                            <li className="nav-item"><p className="nav-link" onClick={ logout }><i data-feather="log-out"></i> <span>Sign Out</span></p></li>
+                            <li className="nav-item"><p className="nav-link" onClick={ () => props.logout() }><i data-feather="log-out"></i> <span>Sign Out</span></p></li>
                             </ul>
                         </div>
                     </div>
@@ -68,12 +46,21 @@ const Menu = (props) => {
                         <li className="nav-label">event</li>
                         <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" exact to="/">
-                                <i data-feather="layout"></i> <span>Home</span>
+                                <i className="fas fa-th-large mg-r-15 tx-16"></i> <span>Home</span>
                             </NavLink>
                         </li>
+                        {
+                            showStage ? 
+                            <li className="nav-item">
+                                <NavLink activeClassName="active" className="nav-link" exact to="/stage">
+                                    <i className="fas fa-door-open  mg-r-15 tx-16"></i> <span>Stage</span>
+                                </NavLink>
+                            </li> :
+                            null
+                        }
                         <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" to="/live-now">
-                                <i data-feather="radio"></i> <span>Live now<span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span></span>
+                            <i className="icon ion-ios-radio mg-r-15 tx-18"></i> <span>Live now<span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span></span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
@@ -88,7 +75,7 @@ const Menu = (props) => {
                         </li>
                         <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" to="/sponsors">
-                            <i className="icon ion-md-business mg-r-15 tx-18"></i> <span>Sponsors</span>
+                                <i className="icon ion-md-business mg-r-15 tx-18"></i> <span>Sponsors</span>
                             </NavLink>
                         </li>
                     </ul>
