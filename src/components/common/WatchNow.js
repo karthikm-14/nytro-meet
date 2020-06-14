@@ -8,13 +8,13 @@ const WatchNow = (props) => {
     let [activeEmbedPlayer, setActiveEmbedPlayer] = useState(false)
     
     let { title, description, speakers, status, eventBannerURL } = {...props.event}
-    let embedPlayer = props.event.eventBridgeR && props.event.eventBridgeR.playerEmbedCode
+    let recordingURL = props.event.eventBridgeR && props.event.eventBridgeR.recordingURL
     eventBannerURL = eventBannerURL ? eventBannerURL : "/assets/images/watch-now-bg.jpg";
 
-    const showEmbedPlayer = (streamToken) => {
-        wowzaJS('', `//player.cloud.wowza.com/hosted/${streamToken}/wowza.js`)
-        setActiveEmbedPlayer(true)
-    }
+    // const showEmbedPlayer = () => {
+    //     // wowzaJS('', `//player.cloud.wowza.com/hosted/${streamToken}/wowza.js`)
+    //     setActiveEmbedPlayer(true)
+    // }
     
     return (
         <Fragment>
@@ -42,8 +42,8 @@ const WatchNow = (props) => {
                                 </h6>
                                 <p className="card-text">{ description } </p>
                                 {
-                                    embedPlayer ?
-                                    <button className="btn btn-primary mg-t-10 tx-11 tx-bold" onClick={ () => showEmbedPlayer('kj8jff0z') }>Watch Now</button> :
+                                    recordingURL ?
+                                    <button className="btn btn-primary mg-t-10 tx-11 tx-bold" onClick={ () => setActiveEmbedPlayer(true) }>Watch Now</button> :
                                     null
                                 }
                             </div>
@@ -51,9 +51,12 @@ const WatchNow = (props) => {
                         </Fragment> :
                         <Fragment>
                             <div id='wowza_player' className="ht-480 wd-100p d-flex align-items-center justify-content-center">
-                                <div className="spinner-grow pos-absolute" role="status">
+                                {/* <div className="spinner-grow pos-absolute" role="status">
                                 <span className="sr-only">Loading...</span>
-                                </div>
+                                </div> */}
+                                <video>
+                                    <source src={recordingURL} type="video/mp4"></source>
+                                </video>
                             </div>
                         </Fragment>
                         }
