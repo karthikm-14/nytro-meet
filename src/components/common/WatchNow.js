@@ -54,7 +54,7 @@ const WatchNow = (props) => {
                                 {/* <div className="spinner-grow pos-absolute" role="status">
                                 <span className="sr-only">Loading...</span>
                                 </div> */}
-                                <video>
+                                <video className="wd-100p">
                                     <source src={recordingURL} type="video/mp4"></source>
                                 </video>
                             </div>
