@@ -16,33 +16,9 @@ import Sessions from "./components/Stage/Sessions";
 
 const App = (props) => {
 
-	const [userInfo, setUserInfo] = useState({})
-	let [isLoading, setIsLoading] = useState(true)
-
-	useEffect(() => {
-        props.keycloak.loadUserInfo().then((userInfo) => {
-            const fullName = userInfo.name.split(" ")
-            let initial = (fullName.length === 1) ? 
-                fullName[0].charAt(0) : 
-                `${fullName[0].charAt(0)}${fullName[fullName.length - 1].charAt(0)}`
-			setUserInfo({
-                name: userInfo.name, 
-                email: userInfo.email, 
-                id: userInfo.sub,
-				initial,
-				roles: props.keycloak.tokenParsed.realm_access.roles
-			})
-			setIsLoading(false)
-        })
-    }, [])
-    
-    const logout = () => {
-        props.keycloak.logout();
-    }
-
     return (
 		<Router>
-			<Menu userInfo={ userInfo } logout={ logout } isLoading={ isLoading }  />
+			<Menu keycloak={ props.keycloak }  />
 			<Switch>
 				<Route path="/" exact component={ Home } />
 				<Route 

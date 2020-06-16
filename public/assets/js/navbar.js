@@ -2,8 +2,6 @@
 $(function(){
   'use strict'
 
-  feather.replace();
-
   ////////// NAVBAR //////////
 
   // Initialize PerfectScrollbar of navbar menu for mobile only

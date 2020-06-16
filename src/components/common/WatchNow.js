@@ -8,58 +8,56 @@ const WatchNow = (props) => {
     let [activeEmbedPlayer, setActiveEmbedPlayer] = useState(false)
     
     let { title, description, speakers, status, eventBannerURL } = {...props.event}
-    let recordingURL = props.event.eventBridgeR && props.event.eventBridgeR.recordingURL
+    let playerEmbedCode = props.event.eventBridgeR && props.event.eventBridgeR.playerEmbedCode
     eventBannerURL = eventBannerURL ? eventBannerURL : "/assets/images/watch-now-bg.jpg";
 
-    // const showEmbedPlayer = () => {
-    //     // wowzaJS('', `//player.cloud.wowza.com/hosted/${streamToken}/wowza.js`)
-    //     setActiveEmbedPlayer(true)
-    // }
+    const showEmbedPlayer = (playerEmbedCode) => {
+        wowzaJS('', `//player.cloud.wowza.com/hosted/${playerEmbedCode}/wowza.js`)
+        setActiveEmbedPlayer(true)
+    }
     
     return (
         <Fragment>
             {
                 props.event.title ?
-                    <div className="card bg-dark text-white">
-                        {
-                        !activeEmbedPlayer ?
+                    <div className="card bg-dark text-white"> 
                         <Fragment>
-                            <div 
-                                className="w-100 rounded-5 card-img ht-480" 
-                                style={{backgroundImage: `url(${eventBannerURL})`, backgroundSize: 'cover'}} >
-                            </div>
-                            <div className="card-img-overlay">
-                            <div className="card-body pos-absolute b-20">
-                                { status === 'LIVE' ? 
-                                    <span className="btn-danger d-inline-flex align-items-center p-0 px-2 tx-12 tx-bold mg-b-10">
-                                        <span className="d-inline-block wd-7 ht-7 bg-gray-100 rounded-circle mg-r-5"></span> LIVE
-                                    </span> :
-                                    null
-                                }
-                                <h5 className="card-title tx-36 tx-light">{ title }</h5>
-                                <h6 className="card-subtitle mb-3 mt-2 text-muted">
-                                    <SpeakersList expand={ true } speakers={ speakers } />
-                                </h6>
-                                <p className="card-text">{ description } </p>
-                                {
-                                    recordingURL ?
-                                    <button className="btn btn-primary mg-t-10 tx-11 tx-bold" onClick={ () => setActiveEmbedPlayer(true) }>Watch Now</button> :
-                                    null
-                                }
-                            </div>
-                            </div>
-                        </Fragment> :
-                        <Fragment>
-                            <div id='wowza_player' className="ht-480 wd-100p d-flex align-items-center justify-content-center">
-                                {/* <div className="spinner-grow pos-absolute" role="status">
-                                <span className="sr-only">Loading...</span>
-                                </div> */}
-                                <video className="wd-100p">
-                                    <source src={recordingURL} type="video/mp4"></source>
-                                </video>
+                            <div className={`${!activeEmbedPlayer ? '' : 'd-none'}`}>
+                                <div 
+                                    className="w-100 rounded-5 card-img ht-480" 
+                                    style={{backgroundImage: `url(${eventBannerURL})`, backgroundSize: 'cover'}} >
+                                </div>
+                                <div className="card-img-overlay">
+                                <div className="card-body pos-absolute b-20">
+                                    { status === 'LIVE' ? 
+                                        <span className="btn-danger d-inline-flex align-items-center p-0 px-2 tx-12 tx-bold mg-b-10">
+                                            <span className="d-inline-block wd-7 ht-7 bg-gray-100 rounded-circle mg-r-5"></span> LIVE
+                                        </span> :
+                                        null
+                                    }
+                                    <h5 className="card-title tx-36 tx-light">{ title }</h5>
+                                    <h6 className="card-subtitle mb-3 mt-2 text-muted">
+                                        <SpeakersList expand={ true } speakers={ speakers } />
+                                    </h6>
+                                    <p className="card-text">{ description } </p>
+                                    {
+                                        status === 'LIVE' && playerEmbedCode ?
+                                        <button className="btn btn-primary mg-t-10 tx-11 tx-bold" onClick={ () => showEmbedPlayer(playerEmbedCode) }>Watch Now</button> :
+                                        null
+                                    }
+                                </div>
+                                </div>
                             </div>
                         </Fragment>
-                        }
+                        <Fragment>
+                            <div className={` ${activeEmbedPlayer ? '' : 'd-none' }`}>
+                            <div id='wowza_player' className={`ht-480 wd-100p d-flex align-items-center justify-content-center`}>
+                                <div className="spinner-grow pos-absolute" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            </div>
+                        </Fragment> 
                     </div> :
                     'No Live events happening...'
             }

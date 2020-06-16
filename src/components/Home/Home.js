@@ -47,7 +47,7 @@ const Home = () => {
     }, [])
 
     const setActiveEventHandler = (id) => {
-        let activeEvent = todayEvents.filter(event => event.id == id);
+        let activeEvent = todayEvents.filter(event => event.id === id);
         setActiveEvent({...activeEvent[0]})
     }
 
