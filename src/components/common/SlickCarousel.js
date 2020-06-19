@@ -16,6 +16,7 @@ const SlickCarousel = (props) => {
         speed: 300,
         slidesToShow: 4,
         slidesToScroll: 4,
+        centerMode: false,
         responsive: [
             {
                 breakpoint: 1024,
@@ -43,9 +44,14 @@ const SlickCarousel = (props) => {
     };
 
     const setEventHandler = (id) => {
-        let event = data.filter(event => event.id === id)
-        setModalEvent(event[0])
+        if(!id) {
+            setModalEvent(null)
+        } else {
+            let event = data.filter(event => event.id === id)
+            setModalEvent(event[0])
+        }
     }
+
 
     const items = data && data.map((event,i) => {
         let { title, speakers, eventBannerURL } = { ...event, ...event.speakers }
@@ -69,7 +75,7 @@ const SlickCarousel = (props) => {
             <Slider {...settings}>
                 { items }
             </Slider>
-            <VideoModal event={ modalEvent } />
+            <VideoModal event={ modalEvent } onClose={ setEventHandler } />
         </Fragment>
     )
 }

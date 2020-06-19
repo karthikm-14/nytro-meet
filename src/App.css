@@ -67,3 +67,7 @@
 .ht-184 {
     height: 184px;
 }
+/* slick carousel custom styles */
+.slick-list .slick-track {
+    margin-left: initial;
+}

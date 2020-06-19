@@ -5,21 +5,30 @@ import API from '../../utils/api'
 
 
 const Sessions = (props) => {
-    const [data, setData] = useState(null)
+    const [upcomingSessions, setUpcomingSessions] = useState(null)
     let [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         API.get('user/jhi-events?eagerload=true')
             .then(response => {
-                let events = []
+                let upcomingSessions = []
+                const today = new Date();
                 response.data.map((event) => {
-                    if(event.status === 'LIVE') {
-                        events.push(event)
+
+                    let todayTimeStamp = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+
+                    let eventDate = new Date(event.startDate)
+                    let eventStartTime = new Date(event.startDate).getTime()
+                    let eventTimeStamp = Date.UTC(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), 0, 0, 0);
+
+
+                    if(todayTimeStamp === eventTimeStamp) {
+                        upcomingSessions.push(event)
                     }
                     return event
                 })
             
-                setData(events)
+                setUpcomingSessions(upcomingSessions)
                 setIsLoading(false)
             })
             .catch(response => console.log(response));
@@ -42,7 +51,7 @@ const Sessions = (props) => {
                     <div className="row row-xs">
                         <div className="col-12">
                             <h6 className="mg-b-15 tx-18 tx-bold">Upcoming Sessions</h6>
-                            { !isLoading ? <SessionCard keycloak={ props.keycloak } data={ data } /> : 'Loading...' }
+                            { !isLoading ? <SessionCard keycloak={ props.keycloak } data={ upcomingSessions } /> : 'Loading...' }
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,11 @@ const LiveAndUpcoming = (props) => {
                 setLiveEvents(liveEvents)
                 setIsLoading(false)
             })
-            .catch(response => console.log(response));
+            .catch(
+                response => {
+                    setIsLoading(false)
+                    console.log(response)
+            });
     }, [])
 
     const setActiveEventHandler = (id) => {
@@ -64,7 +68,7 @@ const LiveAndUpcoming = (props) => {
                         <div className="col-lg-3">
                             <h6 className="mg-b-10 tx-16 tx-normal">Live Now</h6>
                             {
-                                !isLoading && liveEvents.length ? <EventCardView  
+                                !isLoading && liveEvents && liveEvents.length ? <EventCardView  
                                                 activeEvent={ activeEvent } 
                                                 events={ [liveEvents[0]] } 
                                                 setActiveEventHandler = { (id) => setActiveEventHandler(id) }
@@ -77,7 +81,7 @@ const LiveAndUpcoming = (props) => {
                                     <h6 className="mg-b-10 tx-16 tx-normal">Coming Up Next...</h6>
                                     <div className="row row-xs">
                                         {
-                                            !isLoading && draftEvents.length ? <EventCardView  
+                                            !isLoading && draftEvents && draftEvents.length ? <EventCardView  
                                                             activeEvent={ activeEvent } 
                                                             events={ draftEvents } 
                                                             setActiveEventHandler = { (id) => setActiveEventHandler(id) }
@@ -111,7 +115,7 @@ const LiveAndUpcoming = (props) => {
                     <div className="row row-xs mg-t-20">
                         <div className="col-lg-8">
                             {
-                                !isLoading && liveEvents.length ?
+                                !isLoading && liveEvents && liveEvents.length ?
                                     <StreamingView event={ activeEvent } /> :
                                     null
                             }

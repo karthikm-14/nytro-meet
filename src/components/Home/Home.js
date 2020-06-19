@@ -22,20 +22,31 @@ const Home = () => {
                 let doneEvents = []
                 let todayEvents = []
                 let activeEvent = {}
+                const today = new Date();
                 response.data.map((event) => {
 
-                    let eventStartDate = new Date(event.startDate).getDate()
-                    let todayDate = new Date().getDate()
+                    let eventStartTime = new Date(event.startDate).getTime()
+                    let eventDate = new Date(event.startDate)
 
-                    if(event.status === 'DONE') {
+                    let todayTimeStamp = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+                    let eventTimeStamp = Date.UTC(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), 0, 0, 0);
+
+
+                    let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = {...event.eventBridgeR}
+                    if(meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL) {
                         doneEvents.push(event)
-                    // } else if(eventStartDate === todayDate) { // This the actual code 
-                    } else if(eventStartDate === todayDate) { // static code 
+                    // } else if(todayTimeStamp === eventTimeStamp && eventStartTime >= Date.now()) { 
+                    } else if(todayTimeStamp === eventTimeStamp) { // Today's events
+                        // event whic are scheduled for today and from current time
                         todayEvents.push(event)
-                        if(!Object.keys(activeEvent).length) {
-                            activeEvent = event;
-                        }
+                        // if(!Object.keys(activeEvent).length) {
+                        //     activeEvent = event;
+                        // }
                     } 
+                    // updated activeEvent with LIVE event if exists
+                    if(meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL) {
+                        activeEvent = event;
+                    }
                     return event
                 })
                 setTodayEvents(todayEvents)
@@ -88,7 +99,7 @@ const Home = () => {
                                     <div className="row row-xs">
                                         { !isLoading ? 
                                             <EventCardView 
-                                                events={ todayEvents }
+                                                events={ todayEvents.slice(0,4) }
                                                 activeEvent = { activeEvent }
                                                 setActiveEventHandler = { (id) => setActiveEventHandler(id) }
                                                 colSm={ 6 } colLg={ 12 } 
@@ -111,8 +122,8 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    { !isLoading && doneEvents ?
-                        <div id="slider-content" className="mg-t-30">
+                    { !isLoading && doneEvents.length ?
+                        <div id="slider-content" className="mg-t-50">
                             <h6 className="mg-b-10 tx-16 tx-normal">In Case You Missed it...</h6>
                             <SlickCarousel events={ doneEvents } />
                         </div> :
