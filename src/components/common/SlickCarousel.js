@@ -64,7 +64,7 @@ const SlickCarousel = (props) => {
                         </div>
                         <h5 title="google" className="mg-y-10 tx-14 tx-semibold">{ title }</h5>
                         <p className="tx-12 tx-color-03 tx-semibold">
-                            <SpeakersList speakers={ speakers } />
+                            { speakers && speakers.length ? <SpeakersList speakers={ speakers } /> : null }
                         </p>
                     </div>
                 </div>

@@ -41,7 +41,9 @@ const Profiles = () => {
                                 <Link to={`lounge/profile/${attendee.id}`}>
                                     <div className="avatar avatar-lg"><img src={profilePicUrl ? profilePicUrl : "https://via.placeholder.com/350"} className="rounded-circle" alt="" /></div>
                                 </Link>
-                                <h4 className="mg-t-10 tx-14"><a href="" className="tx-white">{ name }</a></h4>
+                                <Link to={`lounge/profile/${attendee.id}`} className="tx-white">
+                                    <h4 className="mg-t-10 tx-14">{ name }</h4>
+                                </Link>
                                 <h6 className="tx-11 mg-b-5 tx-gray-500 tx-nowrap">{ jobPosition }</h6>
                                 <small className="tx-12 text-primary mg-b-10">{ companyName }</small>
                                 <div className="d-flex justify-content-between">    

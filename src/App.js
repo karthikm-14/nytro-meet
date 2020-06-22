@@ -30,7 +30,7 @@ const App = (props) => {
 				<Route path="/lounge" exact component={ Lounge } />
 				<Route path="/lounge/profile/:id" exact component={ AttendeeProfile } />
 				<Route path="/sponsors" exact component={ Sponsors } />
-				<Route path="/sponsors/:company" exact component={ SponsorProfile } />
+				<Route path="/sponsors/:id" exact component={ SponsorProfile } />
 			</Switch>
 		</Router>
     )

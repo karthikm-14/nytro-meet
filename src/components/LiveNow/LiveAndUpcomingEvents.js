@@ -9,32 +9,39 @@ import API from '../../utils/api'
 const LiveAndUpcoming = (props) => {
 
     const [stage, setStage] = useState(null)
+    const [liveEvent, setLiveEvent] = useState(null)
     const [activeEvent, setActiveEvent] = useState(null)
     const [draftEvents, setDraftEvents] = useState(null)
-    const [liveEvents, setLiveEvents] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         API.get(`user/jhi-live-events-by-stage?eagerload=true&stage=${props.match.params.stage}`)
             .then(response => {
-                let activeEvent = {}
+                let liveEvent = {}
                 let draftEvents = []
-                let liveEvents = []
+                const today = new Date();
                 response.data[0].events.map((event) => {
-                    if(event.status === 'LIVE') { 
-                        liveEvents.push(event)
-                        if(!Object.keys(activeEvent).length) {
-                            activeEvent = event;
+                    let eventStartTime = new Date(event.startDate).getTime()
+                    let eventDate = new Date(event.startDate)
+
+                    let todayTimeStamp = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+                    let eventTimeStamp = Date.UTC(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), 0, 0, 0);
+
+                    let { meetingStatus, streamStatus, hlsStreamURL } = {...event.eventBridgeR}
+                    if(meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL) { 
+                        if(!Object.keys(liveEvent).length) {
+                            liveEvent = event;
                         }
-                    } else if(event.status === 'DRAFT') { 
+                    } else if(todayTimeStamp === eventTimeStamp) { // Today's events
                         draftEvents.push(event)
-                    } 
+                    }
+                    
                     return event
                 })
                 setStage(response.data[0])
-                setActiveEvent(activeEvent)
+                setLiveEvent(liveEvent)
                 setDraftEvents(draftEvents)
-                setLiveEvents(liveEvents)
+                setActiveEvent(Object.keys(liveEvent).length ? liveEvent : draftEvents[0])
                 setIsLoading(false)
             })
             .catch(
@@ -42,7 +49,7 @@ const LiveAndUpcoming = (props) => {
                     setIsLoading(false)
                     console.log(response)
             });
-    }, [])
+    }, [props.match.params.stage])
 
     const setActiveEventHandler = (id) => {
         let activeEvent = stage.events.filter(event => event.id === id);
@@ -68,9 +75,10 @@ const LiveAndUpcoming = (props) => {
                         <div className="col-lg-3">
                             <h6 className="mg-b-10 tx-16 tx-normal">Live Now</h6>
                             {
-                                !isLoading && liveEvents && liveEvents.length ? <EventCardView  
+                                !isLoading && Object.keys(liveEvent).length ? 
+                                            <EventCardView  
                                                 activeEvent={ activeEvent } 
-                                                events={ [liveEvents[0]] } 
+                                                events={ [liveEvent] } 
                                                 setActiveEventHandler = { (id) => setActiveEventHandler(id) }
                                             /> : null
                             }
@@ -81,12 +89,13 @@ const LiveAndUpcoming = (props) => {
                                     <h6 className="mg-b-10 tx-16 tx-normal">Coming Up Next...</h6>
                                     <div className="row row-xs">
                                         {
-                                            !isLoading && draftEvents && draftEvents.length ? <EventCardView  
-                                                            activeEvent={ activeEvent } 
-                                                            events={ draftEvents } 
-                                                            setActiveEventHandler = { (id) => setActiveEventHandler(id) }
-                                                            colSm={ 6 } colLg={ 4 }
-                                                        /> : null
+                                            !isLoading && draftEvents && draftEvents.length ? 
+                                                <EventCardView  
+                                                    activeEvent={ activeEvent ? activeEvent : null } 
+                                                    events={ draftEvents } 
+                                                    setActiveEventHandler = { (id) => setActiveEventHandler(id) }
+                                                    colSm={ 6 } colLg={ 4 }
+                                                /> : null
                                         }
                                     </div>
                                 </div>
@@ -115,7 +124,7 @@ const LiveAndUpcoming = (props) => {
                     <div className="row row-xs mg-t-20">
                         <div className="col-lg-8">
                             {
-                                !isLoading && liveEvents && liveEvents.length ?
+                                !isLoading && Object.keys(liveEvent).length ?
                                     <StreamingView event={ activeEvent } /> :
                                     null
                             }

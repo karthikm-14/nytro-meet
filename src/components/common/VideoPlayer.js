@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+
 
 // import 'videojs-contrib-hls/dist/videojs-contrib-hls.js';
 window.videojs = videojs;
 require('videojs-contrib-hls/dist/videojs-contrib-hls.js');
 
 
-class VideoPlayer extends Component {
-    startVideo(video) {
-        videojs(video);
+export default class VideoPlayer extends React.Component {
+    componentDidMount() {
+      // instantiate Video.js
+      this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
+        console.log('onPlayerReady', this)
+      });
     }
-    
+  
+    // destroy player on unmount
+    componentWillUnmount() {
+      if (this.player) {
+        this.player.dispose()
+      }
+    }
+  
+    // wrap the player in a div with a `data-vjs-player` attribute
+    // so videojs won't create additional wrapper in the DOM
+    // see https://github.com/videojs/video.js/pull/3856
     render() {
-        return (
-            <video ref={this.startVideo} style={{'width':'100%', 'height':'480px'}} className="video-js vjs-default-skin" controls>
-                <source src={this.props.source} type="application/x-mpegURL" />
-            </video>
-        );
+      return (
+        <div>	
+          <div data-vjs-player>
+            <video ref={ node => this.videoNode = node } className="video-js"></video>
+          </div>
+        </div>
+      )
     }
-}
-
-VideoPlayer.propTypes = {
-    width: PropTypes.string.isRequired,
-    height: PropTypes.string.isRequired,
-    source: PropTypes.string.isRequired,
-};
-
-export default VideoPlayer;
+  }

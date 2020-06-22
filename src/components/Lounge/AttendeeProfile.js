@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Search from '../common/Search'
 import { Link } from 'react-router-dom'
 import API from '../../utils/api'
+import Attendees from '../common/Attendees'
 
 
 const AttendeeProfile = (props) => {
@@ -16,7 +17,7 @@ const AttendeeProfile = (props) => {
                 setIsLoading(false)
             })
             .catch(response => console.log(response));
-    }, [])
+    }, [props.match.params.id])
 
     let content = !isLoading && <div className="media d-block d-lg-flex">
                     {/* Left */}
@@ -31,10 +32,10 @@ const AttendeeProfile = (props) => {
                                 <h5 className="mg-b-2 tx-spacing--1">{ data.name }</h5>
                                 <p className="tx-color-03 tx-semibold mg-b-5">{ data.jobPosition }</p>
                                 <a href={ data.companyWebsite } target="_blank" rel="noopener noreferrer" className="d-block mg-b-25">{ data.companyName }</a>
-                                <div className="d-flex mg-b-25">
+                                {/* <div className="d-flex mg-b-25">
                                     <button className="btn btn-xs btn-primary flex-fill">Live Chat</button>
-                                </div>
-                                <p className="tx-13 tx-color-02 mg-b-25">Regalix is a global leader partnering with companies on sales enablement, revenue operations and thought-leadership.</p>
+                                </div> */}
+                                {/* <p className="tx-13 tx-color-02 mg-b-25">Regalix is a global leader partnering with companies on sales enablement, revenue operations and thought-leadership.</p> */}
                             </div>    
                             <div className="col-sm-6 col-md-5 col-lg-12 mg-t-20">
                                 <label className="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Social Links</label>
@@ -69,20 +70,7 @@ const AttendeeProfile = (props) => {
                     {/* Right */}
                     <div className="profile-sidebar profile-sidebar-two mg-t-40 mg-lg-t-0 pd-lg-l-15">
                         <div className="row">
-                            <div className="col-sm-6 col-md-5 col-lg mg-t-40 mg-sm-t-0">
-                                <div className="d-flex align-items-center justify-content-between mg-b-20">
-                                    <h6 className="tx-13 tx-spacing-1 tx-uppercase tx-semibold mg-b-0">Attendees from <span className="tx-primary ">regalix</span></h6>
-                                </div>
-                                <ul className="list-unstyled media-list mg-b-15">
-                                    <li className="media align-items-center">
-                                        <a href=""><div className="avatar avatar-online"><img src="https://via.placeholder.com/350" className="rounded-circle" alt="" /></div></a>
-                                        <div className="media-body pd-l-15">
-                                            <p className="tx-medium mg-b-2"><a href="" className="link-01">Roy Recamadas</a></p>
-                                            <span className="tx-12 tx-color-03">UI/UX Designer &amp; Developer</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            { !isLoading ? <Attendees company={ data.companyName } /> : null }
                         </div>
                     </div>
                 </div>

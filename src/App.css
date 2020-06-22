@@ -31,6 +31,21 @@
 .card-img-overlay {
     background-image: linear-gradient(to top right, #000 25%, rgba(255, 255, 255, 0));
 }
+.premiere-sponsor-overlay {
+    background-image: linear-gradient(to bottom, #3b4863 0%, #192848 100%);
+}
+.silve-sponsor-overlay {
+    background-image: linear-gradient(to bottom, #3b4863 0%, #1c273c 100%);
+}
+.border-t-r-r{
+    border-top-right-radius: 0.25em;
+}
+.border-b-r-r {
+    border-bottom-right-radius: 0.25em;
+}
+.img-fit-contain {
+    object-fit: contain;
+}
 /* Custom Typography styles */
 .tx-metropolis-semi-bold {
     font-family: 'Metropolis Semi Bold', sans-serif; 

@@ -30,7 +30,7 @@ const WatchNow = (props) => {
                                 }
                                 <h5 className="card-title tx-36 tx-light">{ title }</h5>
                                 <h6 className="card-subtitle mb-3 mt-2 text-muted">
-                                    <SpeakersList expand={ true } speakers={ speakers } />
+                                    { speakers && speakers.length ? <SpeakersList expand={ true } speakers={ speakers } /> : null }
                                 </h6>
                                 <p className="card-text">{ description } </p>
                                 {
