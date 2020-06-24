@@ -166,7 +166,7 @@ const LiveAndUpcoming = (props) => {
                     <div className="row row-xs mg-t-20">
                         <div className="col-lg-8">
                             {
-                                !isLoading && props.location.sessionId ?
+                                !isLoading && Object.keys(activeEvent).length ?
                                     <Fragment>
                                         {
                                             activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
@@ -191,36 +191,11 @@ const LiveAndUpcoming = (props) => {
                                             <StreamingInfo event={ activeEvent } />
                                         </div>
                                     </Fragment> :
-                                    (
-                                        !isLoading && Object.keys(liveEvent).length ?
-                                            <StreamingView event={ liveEvent } /> :
-                                            (
-                                                !isLoading && activeEvent && Object.keys(activeEvent).length ?
-                                                    <Fragment>
-                                                        {
-                                                            activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
-                                                            activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
-                                                                <video width="100%" controls className="outline-none">
-                                                                    <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
-                                                                    Your browser does not support the video tag.
-                                                                </video> :
-                                                                <img alt="live-now" className="w-100 rounded-5 card-img" src={activeEvent.eventBannerURL} />
-                                                        }
-                                                        <div className="card-body pl-0 pd-t-35">
-                                                            <h6 className="card-title tx-bold tx-24">{ activeEvent.title }</h6>
-                                                            <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">
-                                                                { activeEvent.speakers && activeEvent.speakers.length ? <SpeakersList speakers={ activeEvent.speakers } /> : null }
-                                                            </p>
-                                                            <StreamingInfo event={ activeEvent } />
-                                                        </div>
-                                                    </Fragment> :
-                                                    null
-                                            )       
-                                    )
+                                    null
                             }
                         </div>
                         <div className="col-lg-4 mg-t-10 mg-lg-t-0 ask-question">
-                            <AskAQuestion />
+                            <AskAQuestion  />
                         </div>
                     </div>
                 </div>
