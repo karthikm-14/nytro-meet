@@ -34,7 +34,7 @@ const EventView = (props) => {
                         <div className={`media-body lh-normal ${meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ? 'event-expired': ''}`}>
                             <h5 className="tx-13 lh-2">
                                 { title }
-                                { meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL ? <span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span> : null }
+                                { meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? <span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span> : null }
                             </h5>
                             <p className="tx-12 mg-b-2 tx-semibold">
                                 <Moment format="LT">{ startDate }</Moment> - <Moment format="LT">{ endDate }</Moment>
@@ -48,7 +48,7 @@ const EventView = (props) => {
                             <div className="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                                 <li className="nav-item cursor-pointer">
                                     {
-                                        meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL ? 
+                                        meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? 
                                             <div className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
                                                 <i className='icon ion-md-play-circle mg-r-10 tx-16'></i>
                                                 <span>Watch Now</span>

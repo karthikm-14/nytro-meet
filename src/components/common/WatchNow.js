@@ -22,7 +22,7 @@ const WatchNow = (props) => {
                         <div className="card-img-overlay">
                             <div className="card-body pos-absolute b-20">
                                 { 
-                                    meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL ? 
+                                    meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? 
                                     <span className="btn-danger d-inline-flex align-items-center p-0 px-2 tx-12 tx-bold mg-b-10">
                                         <span className="d-inline-block wd-7 ht-7 bg-gray-100 rounded-circle mg-r-5"></span> LIVE
                                     </span> :
@@ -34,7 +34,7 @@ const WatchNow = (props) => {
                                 </h6>
                                 <p className="card-text">{ description } </p>
                                 {
-                                    meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL ?
+                                    meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ?
                                     <Link to={{pathname: `/live-now/${stage.title}`, event: props.event}}>
                                         <button className="btn btn-primary mg-t-10 tx-11 tx-bold">Watch Now</button>
                                     </Link>

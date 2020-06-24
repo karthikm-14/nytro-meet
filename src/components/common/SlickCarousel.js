@@ -1,15 +1,14 @@
 import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SpeakersList from './SpeakersList';
-import VideoModal from './VideoModal';
 
 
 const SlickCarousel = (props) => {
 
-    const [data, setData] = useState(props.events)
-    const [modalEvent, setModalEvent] = useState(null)
+    const [data, setData] = useState(props.sessions)
 
     const settings = {
         infinite: false,
@@ -43,20 +42,10 @@ const SlickCarousel = (props) => {
         ]
     };
 
-    const setEventHandler = (id) => {
-        if(!id) {
-            setModalEvent(null)
-        } else {
-            let event = data.filter(event => event.id === id)
-            setModalEvent(event[0])
-        }
-    }
-
-
-    const items = data && data.map((event,i) => {
-        let { title, speakers, eventBannerURL } = { ...event, ...event.speakers }
+    const items = data && data.map((session,i) => {
+        let { id, title, speakers, eventBannerURL } = { ...session, ...session.speakers }
         eventBannerURL = eventBannerURL ? eventBannerURL : '';
-        return  <div key={i} className="row-xs cursor-pointer" data-toggle="modal" data-target="#videoModal" onClick={ () => setEventHandler(event.id) }>
+        return  <Link to={{pathname: `/live-now/${session.stage.title}`, sessionId: id}} key={i} className="row-xs cursor-pointer">
                     <div className="slider-item">
                         <div 
                             className="w-100 rounded-5 ht-164" 
@@ -67,7 +56,7 @@ const SlickCarousel = (props) => {
                             { speakers && speakers.length ? <SpeakersList speakers={ speakers } /> : null }
                         </p>
                     </div>
-                </div>
+                </Link>
     })
 
     return (
@@ -75,7 +64,6 @@ const SlickCarousel = (props) => {
             <Slider {...settings}>
                 { items }
             </Slider>
-            <VideoModal event={ modalEvent } onClose={ setEventHandler } />
         </Fragment>
     )
 }

@@ -61,7 +61,9 @@
 .event-expired > * {
     color: #6a6a6a !important;
 }
-
+.background-none {
+    background: none;
+}
 /* Hover effect */
 .bg-dark-hover:hover {
     background-color: #3b4863 !important;
@@ -85,4 +87,22 @@
 /* slick carousel custom styles */
 .slick-list .slick-track {
     margin-left: initial;
+}
+.live-now-section .slick-prev {
+    left: 10px;
+    z-index: 10;
+}
+.live-now-section .slick-next {
+    right: 10px;
+    z-index: 10;
+}
+/* Ask a Question */
+.bg-gray-900-f {
+    background-color: #1c273c !important;
+}
+.bd-none-f {
+    border: none !important;
+}
+.tx-white-f {
+    color: #fff !important;
 }

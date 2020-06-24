@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import WatchNow from '../common/WatchNow'
+// import WatchNow from '../common/WatchNow'
 import EventCardView from '../common/EventCardView'
 import SlickCarousel from '../common/SlickCarousel'
+import LiveNowCarousel from "../common/LiveNowCarousel";
 import Search from '../common/Search'
 
 import API from "../../utils/api";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 
 const Home = () => {
 
     const [data, setData] = useState(null)
-    const [todayEvents, setTodayEvents] = useState([])
+    const [todaySessions, setTodaySessions] = useState([])
     const [doneEvents, setDoneEvents] = useState([])
-    const [activeEvent, setActiveEvent] = useState({})
+    const [liveEvents, setLiveEvents] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [header, setHeader] = useState(null)
 
     useEffect(() => {
         API.get('user/jhi-events?eagerload=true')
             .then(response => {
                 let doneEvents = []
-                let todayEvents = []
-                let activeEvent = {}
+                let todaySessions = []
+                let liveEvents = []
                 const today = new Date();
                 response.data.map((event) => {
 
@@ -33,34 +35,38 @@ const Home = () => {
 
 
                     let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = {...event.eventBridgeR}
+                    
+                    // updated liveEvent with LIVE event if exists
+                    if(meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL) {
+                        liveEvents.push(event);
+                    } 
                     if(meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL) {
                         doneEvents.push(event)
                     // } else if(todayTimeStamp === eventTimeStamp && eventStartTime >= Date.now()) { 
-                    } else if(todayTimeStamp === eventTimeStamp) { // Today's events
+                    }  
+                    if(todayTimeStamp === eventTimeStamp && today.getTime() < eventStartTime) { // Today's events
                         // event whic are scheduled for today and from current time
-                        todayEvents.push(event)
-                        // if(!Object.keys(activeEvent).length) {
-                        //     activeEvent = event;
+                        todaySessions.push(event)
+                        // if(!Object.keys(liveEvent).length) {
+                        //     liveEvent = event;
                         // }
-                    } 
-                    // updated activeEvent with LIVE event if exists
-                    if(meetingStatus === 'live_stream' && streamStatus === 'started' && hlsStreamURL) {
-                        activeEvent = event;
                     }
                     return event
                 })
-                setTodayEvents(todayEvents)
+                setTodaySessions(todaySessions)
                 setDoneEvents(doneEvents)
-                setActiveEvent(activeEvent)
+                setLiveEvents(liveEvents.length ? liveEvents : (todaySessions.length ? [todaySessions[0]] : [doneEvents[0]]))
+                if(liveEvents.length) {
+                    setHeader('Live Now')
+                } else if (todaySessions.length) {
+                    setHeader('Upcoming Session')
+                } else {
+                    setHeader('Past Session')
+                }
                 setIsLoading(false)
             })
             .catch(response => console.log(response));
     }, [])
-
-    const setActiveEventHandler = (id) => {
-        let activeEvent = todayEvents.filter(event => event.id === id);
-        setActiveEvent({...activeEvent[0]})
-    }
 
     return (
         <div className="content ht-100v pd-0">
@@ -77,10 +83,12 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="row row-xs">
-                        <div className="col-lg-9">
-                            <h6 className="mg-b-10 tx-16 tx-normal">Live Now</h6>
+                        <div className="col-lg-9 live-now-section">
+                            <h6 className="mg-b-10 tx-16 tx-normal">
+                                { header }
+                            </h6>
                             { !isLoading ? 
-                                <WatchNow event={ activeEvent } /> :  
+                                <LiveNowCarousel events={ liveEvents } /> :  
                                 <div className="live-now-wrapper bg-gray-400 col-xs-6 rounded pos-relative">
                                     <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
                                         <div className="line"></div>
@@ -99,9 +107,7 @@ const Home = () => {
                                     <div className="row row-xs">
                                         { !isLoading ? 
                                             <EventCardView 
-                                                events={ todayEvents.slice(0,4) }
-                                                activeEvent = { activeEvent }
-                                                setActiveEventHandler = { (id) => setActiveEventHandler(id) }
+                                                events={ todaySessions.slice(0,4) }
                                                 colSm={ 6 } colLg={ 12 } 
                                             /> : 
                                             <div className="col-12">
@@ -125,7 +131,7 @@ const Home = () => {
                     { !isLoading && doneEvents.length ?
                         <div id="slider-content" className="mg-t-50">
                             <h6 className="mg-b-10 tx-16 tx-normal">In Case You Missed it...</h6>
-                            <SlickCarousel events={ doneEvents } />
+                            <SlickCarousel sessions={ doneEvents } />
                         </div> :
                         null
                     }

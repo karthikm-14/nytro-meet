@@ -11,6 +11,7 @@ const Menu = (props) => {
     useEffect(() => {
         props.keycloak.loadUserInfo().then((userInfo) => {
             const fullName = userInfo.name.split(" ")
+            document.userEmail = userInfo.email 
             let initial = (fullName.length === 1) ? 
                 fullName[0].charAt(0) : 
                 `${fullName[0].charAt(0)}${fullName[fullName.length - 1].charAt(0)}`
@@ -23,7 +24,7 @@ const Menu = (props) => {
 			})
 			setIsLoading(false)
         })
-    }, [])
+    }, [props.keycloak])
     
     const logout = () => {
         props.keycloak.logout();
