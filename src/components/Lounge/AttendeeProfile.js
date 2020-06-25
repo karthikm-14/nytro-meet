@@ -3,6 +3,7 @@ import Search from '../common/Search'
 import { Link } from 'react-router-dom'
 import API from '../../utils/api'
 import Attendees from '../common/Attendees'
+import LatestActivity from './LatestActivity'
 
 
 const AttendeeProfile = (props) => {
@@ -50,22 +51,7 @@ const AttendeeProfile = (props) => {
                     </div>
                     {/* Center */}
                     <div className="media-body mg-t-40 mg-lg-t-0 pd-lg-x-10">
-                        <div className="card mg-b-20 mg-lg-b-25">
-                            <div className="card-header pd-y-15 pd-x-20 d-flex align-items-center justify-content-between">
-                                <h6 className="tx-13 tx-spacing-1 tx-uppercase tx-semibold mg-b-0">Latest Activity</h6>
-                            </div>
-                            <div className="card-body pd-20 pd-lg-25">
-                                <div className="media align-items-center mg-b-20">
-                                    <div className="avatar avatar-online"><img src="https://via.placeholder.com/500" className="rounded-circle" alt="" /></div>
-                                    <div className="media-body pd-l-15">
-                                        <h6 className="mg-b-3">Regalix Inc.</h6>
-                                        <span className="d-block tx-13 tx-color-03">www.regalix.com</span>
-                                    </div>
-                                    <span className="d-none d-sm-block tx-12 tx-color-03 align-self-start">5 hours ago</span>
-                                </div>
-                                <p className="mg-b-20">Our team is expanding again. We are looking for a Product Manager and Software Engineer to drive our new aspects of our capital projects. If you're interested, please drop a comment here or simply message me. <a href="">#softwareengineer</a> <a href="">#engineering</a></p>
-                            </div>
-                        </div>
+                        <LatestActivity name={ data.name } email={ data.email } position={ data.jobPosition } icon={ data.profilePicUrl } company={ data.companyName } />
                     </div>
                     {/* Right */}
                     <div className="profile-sidebar profile-sidebar-two mg-t-40 mg-lg-t-0 pd-lg-l-15">

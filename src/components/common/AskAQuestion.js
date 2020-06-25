@@ -5,18 +5,19 @@ import Moment from 'react-moment'
 import ScrollArea from 'react-scrollbar'
 
 
-const AskAQuestion = () => {
+const AskAQuestion = (props) => {
 
     const [questionsList, setQuestionsList] = useState([])
     let [questionAsked, setQuestionAsked] = useState('')
     let [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        getQuestions()
-    }, [])
+        setIsLoading(true)
+        getQuestions(props.bridge.id)
+    }, [props.bridge])
 
-    const getQuestions = () => {
-        API.get('user/jhi-event-stream-questions-for-stream/3901')
+    const getQuestions = (id) => {
+        API.get(`user/jhi-event-stream-questions-for-stream/${id}`)
             .then(response => {
                 setQuestionsList(response.data)
                 setQuestionAsked('')
@@ -34,12 +35,12 @@ const AskAQuestion = () => {
             "approvedDate":date,
             "questionDate":date,
             "askedOn":{
-                "id":3901
+                "id": props.bridge.id
             }
         })
         .then(response => {
             if(response.status === 201 && response.statusText === 'Created') {
-                getQuestions()
+                getQuestions(props.bridge.id)
             }
         })
         .catch(response => console.log(response));
@@ -78,20 +79,40 @@ const AskAQuestion = () => {
                     </div>
                     <ScrollArea className="ht-400" >
                         <ul className="list-unstyled pd-l-20 pd-r-20">
-                            { !isLoading ? (questionsList.length ? list : 'No Questions asked.') : 'Loading...'  }
+                            { 
+                                !isLoading ? 
+                                    (
+                                        questionsList.length ? 
+                                            list :
+                                            <div className="ht-300 d-flex align-items-center justify-content-center tx-bold">
+                                                No Questions asked.
+                                            </div>
+                                    ) 
+                                : 
+                                <div className="ht-300 d-flex align-items-center justify-content-center">
+                                    <div className="spinner-grow" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                </div>  
+                            }
+                            
                         </ul>
                     </ScrollArea>
-                    <form onSubmit={handleSubmit} className="card-footer mg-t-10">
-                        <label className="mg-0">
-                            <input
-                            className="bd-none tx-white outline-none background-none border-0"
-                            type="text"
-                            value={ questionAsked }
-                            placeholder='Type Here...'
-                            onChange={e => setQuestionAsked(e.target.value)}
-                            />
-                        </label>
-                    </form>
+                    {
+                        !isLoading && props.bridge.meetingStatus === 'started' && props.bridge.streamStatus === 'started' ?
+                            <form onSubmit={handleSubmit} className="card-footer mg-t-10">
+                                <label className="mg-0">
+                                    <input
+                                    className="bd-none tx-white outline-none background-none border-0"
+                                    type="text"
+                                    value={ questionAsked }
+                                    placeholder='Type Here...'
+                                    onChange={e => setQuestionAsked(e.target.value)}
+                                    />
+                                </label>
+                            </form> :
+                            null
+                    }
                 </div>
             </div>
         </Fragment>

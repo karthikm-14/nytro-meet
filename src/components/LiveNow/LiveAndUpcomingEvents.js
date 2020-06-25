@@ -65,7 +65,6 @@ const LiveAndUpcoming = (props) => {
                 } else if(pastEvents && pastEvents.length) {
                     setActiveEvent(pastEvents[0])
                 }
-                
                 setIsLoading(false)
             })
             .catch(
@@ -73,8 +72,43 @@ const LiveAndUpcoming = (props) => {
                     setIsLoading(false)
                     console.log(response)
             });
-    }, [props.location.sessionId, props.match.params.stage])
 
+            // fetchData(activeEvent)
+
+    }, [props.location.sessionId, props.match.params.stage])
+    
+    useEffect(() => {
+        if(activeEvent && activeEvent.eventBridgeR) {
+            let date = new Date().toISOString()
+            let activityId = null
+            API.post('user/jhi-event-bridge-activities', {
+                "activityName": "Is currently watching...",
+                "activityBy": document.userEmail,
+                "activityTime": date,
+                "activityBridge": {"id": activeEvent.eventBridgeR.id}, "activityType" : "EVENT_STREAM"
+            })
+            .then(response => {
+                activityId = response.data.id
+                // setActivityId(response.data.id)
+            })
+            .catch(response => console.log(response));
+            return () => {
+                API.put('user/jhi-event-bridge-activities', {
+                    "id": activityId,
+                    "activityName": "watched",
+                    "activityBy": document.userEmail,
+                    "activityTime": date,
+                    "activityBridge": {"id": activeEvent.eventBridgeR.id}, "activityType" : "EVENT_STREAM"
+                })
+                .then(response => {
+                    // console.log(response)
+                })
+                .catch(response => console.log(response));
+            }
+        }
+    }, [activeEvent])
+
+    
     const setActiveEventHandler = (id) => {
         let activeEvent = stage.events.filter(event => event.id === id);
         setActiveEvent({...activeEvent[0]})
@@ -171,7 +205,7 @@ const LiveAndUpcoming = (props) => {
                                         {
                                             activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
                                             activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
-                                                <video width="100%" controls className="outline-none">
+                                                <video key={activeEvent.id} width="100%" controls className="outline-none">
                                                     <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video> :
@@ -195,7 +229,12 @@ const LiveAndUpcoming = (props) => {
                             }
                         </div>
                         <div className="col-lg-4 mg-t-10 mg-lg-t-0 ask-question">
-                            <AskAQuestion  />
+                            { !isLoading && Object.keys(activeEvent).length && activeEvent.eventBridgeR ? 
+                                <AskAQuestion 
+                                    bridge= { activeEvent.eventBridgeR } 
+                                /> : 
+                                null 
+                            }
                         </div>
                     </div>
                 </div>
