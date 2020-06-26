@@ -1,23 +1,13 @@
 import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import SpeakersList from '../common/SpeakersList'
-import VideoModal from '../common/VideoModal';
 
 
 const EventView = (props) => {
 
     const [data, setData] = useState(props.events)
-    const [modalEvent, setModalEvent] = useState(null)
-
-    const setEventHandler = (id) => {
-        if(!id) {
-            setModalEvent(null)
-        } else {
-            let event = data.filter(event => event.id === id)
-            setModalEvent(event[0])
-        }
-    }
 
     const items = data && data.map(event => {
         
@@ -49,16 +39,21 @@ const EventView = (props) => {
                                 <li className="nav-item cursor-pointer">
                                     {
                                         meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? 
-                                            <div className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
-                                                <i className='icon ion-md-play-circle mg-r-10 tx-16'></i>
-                                                <span>Watch Now</span>
-                                            </div> : 
+                                            <Link 
+                                                to={{pathname: `/live-now/${props.stageTitle}`, sessionId: id}}
+                                                className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold"
+                                            >
+                                                <i className='icon ion-md-play-circle mg-r-10 tx-16'></i> Watch Now
+                                            </Link> : 
                                             (
                                                 meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ? 
-                                                    <div data-toggle="modal" data-target="#videoModal" onClick={ () => setEventHandler(id) } className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
-                                                        <i className='icon ion-md-play-circle mg-r-10 tx-16'></i>
-                                                        <span>Watch Again</span>
-                                                    </div> :
+                                                    <Link 
+                                                        to={{pathname: `/live-now/${props.stageTitle}`, sessionId: id}}
+                                                        className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold"
+                                                    >
+                                                        <i className='icon ion-md-play-circle mg-r-10 tx-16'></i> Watch Again
+                                                    </Link>
+                                                    :
                                                     <div className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
                                                         <i className='icon ion-md-alarm mg-r-10 tx-16'></i>
                                                         <span>Set Reminder</span>
@@ -86,7 +81,6 @@ const EventView = (props) => {
     return (
         <Fragment>
             { items } 
-            <VideoModal event={ modalEvent } onClose={ setEventHandler } />
         </Fragment>
     )
 }

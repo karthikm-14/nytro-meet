@@ -11,6 +11,7 @@ const Schedule = () => {
     const [stages, setStages] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [activeDate, setActiveDate] = useState(null) 
+    let [stageLoading, setStageLoading] = useState(true) 
 
     const formatDate = (n) => {
         return n<10 ? '0'+n : n
@@ -27,7 +28,7 @@ const Schedule = () => {
     }, [])
 
     const getData = (date) => {
-        API.get(`user/jhi-events-schedule-stats?from_date=${date}`)
+        API.get(`user/jhi-events-schedule-stats`)
             .then(response => {
                 setData(response.data)
                 setActiveDate(date)
@@ -37,10 +38,12 @@ const Schedule = () => {
     }
 
     const getStages = (date) => {
+            setStageLoading(true)
             API.get(`user/jhi-live-events-by-date?start_date=${date}`)
                 .then(response => {
                     setActiveDate(date)
                     setStages(response.data)
+                    setStageLoading(false)
                 })
                 .catch(response => console.log(response));
     }
@@ -62,9 +65,9 @@ const Schedule = () => {
                     <div className="row row-xs">
                             <div className="col-12">
                                 <h6 className="mg-b-10 tx-16 tx-normal">Full Schedule</h6>
-                                <div className="row row-xs">
+                                
                                 { isLoading ?
-                                    <Fragment>
+                                    <div className="row row-xs">
                                         <div className="col-sm-6 col-md-4 col-lg-3">
                                             <div className="bg-gray-400 rounded pos-relative ht-120">
                                                 <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
@@ -79,13 +82,25 @@ const Schedule = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Fragment> :
-                                    <DateCardView data={ data } activeDate={ activeDate } getStages={ (date) => getStages(date) } itemsCount={ 3 } colSm={ 6 } colMd={ 4 } colXl={ 3 } />
+                                    </div> :
+                                    <DateCardView data={ data } activeDate={ activeDate } getStages={ (date) => getStages(date) } />
                                 }
-                                </div>
                             </div> 
                     </div>
-                    { stages && stages.length ? <StageListView stages={ stages } itemsCount={ 3 } /> : null }
+                    { 
+                        !stageLoading  ? 
+                            <StageListView stages={ stages } /> 
+                            : 
+                            <div className="mg-t-35">
+                                <div className="col-sm-6 col-md-4 col-lg-4 pd-0">
+                                    <div className="bg-gray-400 rounded pos-relative ht-120">
+                                        <div className="placeholder-paragraph pd-20 pos-absolute wd-100p b-0">
+                                            <div className="line"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    }
                 </div>
             </div>
         </div>

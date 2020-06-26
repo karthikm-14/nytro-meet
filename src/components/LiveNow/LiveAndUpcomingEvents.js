@@ -200,36 +200,42 @@ const LiveAndUpcoming = (props) => {
                     <div className="row row-xs mg-t-20">
                         <div className="col-lg-8">
                             {
-                                !isLoading && Object.keys(activeEvent).length ?
-                                    <Fragment>
-                                        {
-                                            activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
-                                            activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
-                                                <video key={activeEvent.id} width="100%" controls className="outline-none">
-                                                    <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
-                                                    Your browser does not support the video tag.
-                                                </video> :
-                                                (
-                                                    activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'started' &&
-                                                    activeEvent.eventBridgeR.streamStatus === 'started' && activeEvent.eventBridgeR.hlsStreamURL
-                                                    ?
-                                                    <StreamingView event={ activeEvent } /> :
-                                                    <img alt="live-now" className="w-100 rounded-5 card-img" src={activeEvent.eventBannerURL} />
-                                                )
-                                        }
-                                        <div className="card-body pl-0 pd-t-35">
-                                            <h6 className="card-title tx-bold tx-24">{ activeEvent.title }</h6>
-                                            <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">
-                                                { activeEvent.speakers && activeEvent.speakers.length ? <SpeakersList speakers={ activeEvent.speakers } /> : null }
-                                            </p>
-                                            <StreamingInfo event={ activeEvent } />
-                                        </div>
-                                    </Fragment> :
+                                !isLoading ?
+                                    (
+                                        activeEvent && Object.keys(activeEvent).length ?
+                                            <Fragment>
+                                                {
+                                                    activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
+                                                    activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
+                                                        <video key={activeEvent.id} width="100%" controls className="outline-none">
+                                                            <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
+                                                            Your browser does not support the video tag.
+                                                        </video> :
+                                                        (
+                                                            activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'started' &&
+                                                            activeEvent.eventBridgeR.streamStatus === 'started' && activeEvent.eventBridgeR.hlsStreamURL
+                                                            ?
+                                                            <StreamingView event={ activeEvent } /> :
+                                                            <img alt="live-now" className="w-100 rounded-5 card-img" src={activeEvent.eventBannerURL} />
+                                                        )
+                                                }
+                                                <div className="card-body pl-0 pd-t-35">
+                                                    <h6 className="card-title tx-bold tx-24">{ activeEvent.title }</h6>
+                                                    <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">
+                                                        { activeEvent.speakers && activeEvent.speakers.length ? <SpeakersList speakers={ activeEvent.speakers } /> : null }
+                                                    </p>
+                                                    <StreamingInfo event={ activeEvent } />
+                                                </div>
+                                            </Fragment>
+                                            :
+                                            'No Events happended or planned!'
+                                    )
+                                    :
                                     null
                             }
                         </div>
                         <div className="col-lg-4 mg-t-10 mg-lg-t-0 ask-question">
-                            { !isLoading && Object.keys(activeEvent).length && activeEvent.eventBridgeR ? 
+                            { !isLoading && activeEvent && Object.keys(activeEvent).length && activeEvent.eventBridgeR ? 
                                 <AskAQuestion 
                                     bridge= { activeEvent.eventBridgeR } 
                                 /> : 

@@ -109,3 +109,14 @@
 .tx-white-f {
     color: #fff !important;
 }
+/* live now date card custom arrows */
+.date-card-slider .slick-prev {
+    right: 35px;
+    top: -20px;
+    left: auto;
+}
+.date-card-slider .slick-next {
+    right: 8px;
+    top: -20px;
+    left: auto;
+}
