@@ -46,6 +46,9 @@
 .img-fit-contain {
     object-fit: contain;
 }
+.img-fit-contain-f {
+    object-fit: contain !important;
+}
 /* Custom Typography styles */
 .tx-metropolis-semi-bold {
     font-family: 'Metropolis Semi Bold', sans-serif; 

@@ -5,11 +5,11 @@ const SocialLinks = (props) => {
 
     const links = props.links.map(link => {
         if(link.keyName === 'linkedin') {
-            return <li key={link.id}><i className="fab fa-linkedin mg-r-10 tx-18" ></i><a href={link.keyValue} target="_blank">{link.entityName}</a></li>
+            return <li key={link.id} className="tx-12 tx-medium"><i className="fab fa-linkedin mg-r-10 tx-18" ></i><a href={link.keyValue} target="_blank">Linkedin</a></li>
         } else if(link.keyName === 'facebook') {
-            return  <li key={link.id}><i className="fab fa-facebook mg-r-10 tx-18"></i><a href={link.keyValue} target="_blank">{link.entityName}</a></li>
+            return  <li key={link.id} className="tx-12 tx-medium"><i className="fab fa-facebook mg-r-10 tx-18"></i><a href={link.keyValue} target="_blank">Facebook</a></li>
         } else if(link.keyName === 'twitter') {
-            return  <li key={link.id}><i className="fab fa-twitter mg-r-10 tx-18" ></i><a href={link.keyValue} target="_blank">{link.entityName}</a></li>
+            return  <li key={link.id} className="tx-12 tx-medium"><i className="fab fa-twitter mg-r-10 tx-18" ></i><a href={link.keyValue} target="_blank">Twitter</a></li>
         }
     });
 
