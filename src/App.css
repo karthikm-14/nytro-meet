@@ -120,3 +120,7 @@
     top: -20px;
     left: auto;
 }
+.blur-15 {
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+}

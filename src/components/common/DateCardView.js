@@ -58,7 +58,7 @@ const DateCardView = (props) => {
                             >
                                 <h6 className={`lh-normal text-uppercase ${schedule.date === props.activeDate ? 'text-white' : 'tx-color-03'}`}>{ schedule.day }</h6>
                                 <h4 className={`tx-24 ${schedule.date === props.activeDate ? 'text-primary' : ''}`}>{ formateDate(schedule.date) }</h4>
-                                <p className={`lh-normal mg-b-0 ${ schedule.date === props.activeDate ? 'text-white' : 'tx-color-03'}`}>{ schedule.totalEvents } Events</p>
+                                <p className={`lh-normal mg-b-0 ${ schedule.date === props.activeDate ? 'text-white' : 'tx-color-03'}`}>{ schedule.totalEvents } {schedule.totalEvents > 1 ? 'Sessions' : 'Session' }</p>
                             </div>
                         </div>
                     </div>

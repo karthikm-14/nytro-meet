@@ -21,7 +21,6 @@ const LiveNow = () => {
 
     return (
         <div className="content ht-100v pd-0">
-            <Search />
             <div className="content-body">
                 <div className="container pd-x-0">
                     <div className="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">

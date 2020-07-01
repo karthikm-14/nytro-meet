@@ -4,7 +4,7 @@ import List from './List'
 
 
 const Menu = (props) => {
-
+    
 	const [userInfo, setUserInfo] = useState({})
 	let [isLoading, setIsLoading] = useState(true)
     
@@ -34,7 +34,9 @@ const Menu = (props) => {
         <Fragment>
             <aside className="aside aside-fixed">
                 <div className="aside-header">
-                    <a href="/" className="aside-logo">dash<span>forge</span></a>
+                    <a href="/" className="aside-logo">
+                        <img className="logo"  src="/assets/images/horasis-logo.png" />
+                    </a>
                     <a href="#" className="aside-menu-link">
                         <i data-feather="menu"></i>
                         <i data-feather="x"></i>

@@ -44,7 +44,7 @@ const EventCardView = (props) => {
 
     return (
         <Fragment>
-            { items.length ? items : 'No Streams today...' }
+            { items.length ? items : <div className="col-xs">No Sessions today.</div> }
         </Fragment>
     )
 }

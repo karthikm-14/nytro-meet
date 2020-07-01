@@ -23,12 +23,12 @@ const LiveNowCarousel = (props) => {
         let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = {...event.eventBridgeR}
         eventBannerURL = eventBannerURL ? eventBannerURL : '';
         
-        return  <div key={id} className="card bg-dark text-white">
+        return  <div key={id} className="card bg-dark text-white rounded-5">
                     <div 
                         className="w-100 rounded-5 card-img ht-480" 
                         style={{backgroundImage: `url(${eventBannerURL})`, backgroundSize: 'cover'}} >
                     </div>
-                    <div className="card-img-overlay">
+                    <div className="card-img-overlay rounded-5">
                         <div className="card-body pos-absolute b-20">
                             { 
                                 meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? 

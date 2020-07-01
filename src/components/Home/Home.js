@@ -24,16 +24,16 @@ const Home = () => {
                 let doneEvents = []
                 let todaySessions = []
                 let liveEvents = []
+                let upComingSessions = []
                 const today = new Date();
                 response.data.map((event) => {
-
                     let eventStartTime = new Date(event.startDate).getTime()
                     let eventDate = new Date(event.startDate)
-
+                    
                     let todayTimeStamp = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
                     let eventTimeStamp = Date.UTC(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), 0, 0, 0);
-
-
+                    
+                    
                     let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = {...event.eventBridgeR}
                     
                     // updated liveEvent with LIVE event if exists
@@ -42,23 +42,25 @@ const Home = () => {
                     } 
                     if(meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL) {
                         doneEvents.push(event)
-                    // } else if(todayTimeStamp === eventTimeStamp && eventStartTime >= Date.now()) { 
+                        // } else if(todayTimeStamp === eventTimeStamp && eventStartTime >= Date.now()) { 
                     }  
                     if(todayTimeStamp === eventTimeStamp && today.getTime() < eventStartTime) { // Today's events
-                        // event whic are scheduled for today and from current time
-                        todaySessions.push(event)
-                        // if(!Object.keys(liveEvent).length) {
+                    // event whic are scheduled for today and from current time
+                    todaySessions.push(event)
+                    // if(!Object.keys(liveEvent).length) {
                         //     liveEvent = event;
                         // }
+                    } else if(today.getTime() < eventStartTime) {
+                        upComingSessions.push(event)
                     }
                     return event
                 })
                 setTodaySessions(todaySessions)
                 setDoneEvents(doneEvents)
-                setLiveEvents(liveEvents.length ? liveEvents : (todaySessions.length ? [todaySessions[0]] : [doneEvents[0]]))
+                setLiveEvents(liveEvents.length ? liveEvents : (todaySessions.length ? [todaySessions[0]] : (upComingSessions.length ? [upComingSessions[0]] : (doneEvents.length ? [doneEvents[0]] : null ))))
                 if(liveEvents.length) {
                     setHeader('Live Now')
-                } else if (todaySessions.length) {
+                } else if (todaySessions.length || upComingSessions.length) {
                     setHeader('Upcoming Session')
                 } else {
                     setHeader('Past Session')
@@ -70,7 +72,6 @@ const Home = () => {
 
     return (
         <div className="content ht-100v pd-0">
-            <Search />
             <div className="content-body">
                 <div className="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
                     <div className="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
