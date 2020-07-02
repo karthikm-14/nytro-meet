@@ -14,7 +14,10 @@ const AskAQuestion = (props) => {
     useEffect(() => {
         setIsLoading(true)
         if(props.bridge.meetingStatus === 'started' && props.bridge.streamStatus === 'started') {
-            setInterval(() => getcontinuousQuestions(props.bridge.id), 3000);
+            const interval = setInterval(() => {
+                getcontinuousQuestions(props.bridge.id)
+              }, 3000);
+              return () => clearInterval(interval);
         } else {
             getQuestions(props.bridge.id)
         }
