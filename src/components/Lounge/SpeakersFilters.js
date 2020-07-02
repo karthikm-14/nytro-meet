@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import API from '../../utils/api'
 
 
-const ProfileFilters = (props) => {
+const SpeakersFilters = (props) => {
 
     const [specializationData, setSpecializationData] = useState(null)
     const [isSpecializationLoading, setIsSpecializationLoading] = useState(true)
@@ -15,7 +15,7 @@ const ProfileFilters = (props) => {
     }, [])
 
     const getSpecializations = (specialization) => {
-        API.get(`user/event/jhi-event-attendee-stats-by-position`)
+        API.get(`user/event/jhi-event-speaker-stats-by-position`)
             .then(response => {
                 setSpecializationData(response.data)
                 setIsSpecializationLoading(false)
@@ -24,7 +24,7 @@ const ProfileFilters = (props) => {
     }
 
     const getCompanies = () => {
-        API.get(`user/event/jhi-event-attendee-stats-by-company?`)
+        API.get(`user/event/jhi-event-speaker-stats-by-company?`)
             .then(response => {
                 setCompanyData(response.data)
                 setIsCompanyLoading(false)
@@ -78,4 +78,4 @@ const ProfileFilters = (props) => {
     )
 }
 
-export default ProfileFilters
+export default SpeakersFilters

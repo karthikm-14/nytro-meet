@@ -23,7 +23,7 @@ const Header = (props) => {
                 </a>
                 <p className="tx-color-03 tx-12 mg-b-0">Administrator</p>
             </div>
-            <div className="collapse" id="loggedinMenu">
+            {/* <div className="collapse" id="loggedinMenu">
                 <ul className="nav nav-aside mg-b-0">
                 <li className="nav-item"><a href="#" className="nav-link"><Edit /> <span>Edit Profile</span></a></li>
                 <li className="nav-item"><a href="#" className="nav-link"><User /> <span>View Profile</span></a></li>
@@ -31,7 +31,7 @@ const Header = (props) => {
                 <li className="nav-item"><a href="#" className="nav-link"><HelpCircle /> <span>Help Center</span></a></li>
                 <li className="nav-item"><p className="nav-link" onClick={ props.logout }><LogOut /> <span>Sign Out</span></p></li>
                 </ul>
-            </div>
+            </div> */}
         </Fragment>
     )
 }

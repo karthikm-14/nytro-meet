@@ -21,7 +21,7 @@ const EventCardView = (props) => {
                             <small className="lh-normal tx-14 tx-color-03">
                                 <Moment format="LT">{ startDate }</Moment>
                             </small>
-                            <h6 className="mg-t-4 mg-b-10 tx-16 ht-32 lh-normal">{ title }</h6>
+                            <h6 className="mg-t-4 mg-b-10 tx-16 ht-32 lh-normal overflow-hidden" title={ title }>{ title }</h6>
                             <p className="lh-normal tx-12 tx-color-03 mg-b-0">
                                 { speakers && speakers.length ? <SpeakersList speakers={ speakers } /> : null }
                             </p>
@@ -33,7 +33,7 @@ const EventCardView = (props) => {
                             <small className="lh-normal tx-14 tx-color-03">
                                 <Moment format="LT">{ startDate }</Moment>
                             </small>
-                            <h6 className="mg-t-4 mg-b-10 tx-16 ht-32 lh-normal">{ title }</h6>
+                            <h6 className="mg-t-4 mg-b-10 tx-16 ht-32 lh-normal overflow-hidden" title={ title }>{ title }</h6>
                             <p className="lh-normal tx-12 tx-color-03 mg-b-0">
                                 { speakers && speakers.length ? <SpeakersList speakers={ speakers } /> : null }
                             </p>

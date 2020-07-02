@@ -13,7 +13,11 @@ const AskAQuestion = (props) => {
 
     useEffect(() => {
         setIsLoading(true)
-        getQuestions(props.bridge.id)
+        if(props.bridge.meetingStatus === 'started' && props.bridge.streamStatus === 'started') {
+            setInterval(() => getcontinuousQuestions(props.bridge.id), 3000);
+        } else {
+            getQuestions(props.bridge.id)
+        }
     }, [props.bridge])
 
     const getQuestions = (id) => {
@@ -21,6 +25,15 @@ const AskAQuestion = (props) => {
             .then(response => {
                 setQuestionsList(response.data)
                 setQuestionAsked('')
+                setIsLoading(false)
+            })
+            .catch(response => console.log(response));
+    }
+
+    const getcontinuousQuestions = (id) => {
+        API.get(`user/jhi-event-stream-questions-for-stream/${id}`)
+            .then(response => {
+                setQuestionsList(response.data)
                 setIsLoading(false)
             })
             .catch(response => console.log(response));
@@ -67,11 +80,11 @@ const AskAQuestion = (props) => {
     return (
         <Fragment>
             <ul className="nav nav-tabs" id="myTab" role="tablist">
-                <li className="nav-item">
+                <li className="nav-item wd-100p">
                     <a className="nav-link active bg-gray-900-f bd-none-f tx-white-f tx-bold pd-25-f" id="ask-question-tab" data-toggle="tab" href="#ask-question" role="tab" aria-controls="ask-question" aria-selected="true"><HelpCircle className="mg-r-10 tx-18" /> Ask a Question</a>
                 </li>
             </ul>
-            <div className="tab-content bd bd-gray-300 bg-gray-900 bd-t-0 pd-0" id="myTabContent">
+            <div className="tab-content bd-gray-300 bg-gray-900 bd-t-0 pd-0" id="myTabContent">
                 <div className="tab-pane fade show active" id="ask-question" role="tabpanel" aria-labelledby="ask-question-tab">
                     <div className="tx-gray-500 text-center tx-12 tx-semibold pd-t-20">
                         <span>Ask a question to the speaker.</span>

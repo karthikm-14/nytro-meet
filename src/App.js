@@ -12,6 +12,7 @@ import Sponsors from "./components/Sponsors/Sponsors";
 import SponsorProfile from "./components/Sponsors/SponsorProfile";
 import AttendeeProfile from "./components/Lounge/AttendeeProfile";
 import Sessions from "./components/Stage/Sessions";
+import SpeakerProfile from "./components/Lounge/SpeakerProfile";
 
 
 const App = (props) => {
@@ -28,7 +29,8 @@ const App = (props) => {
 				<Route path="/live-now/:stage" exact component={ LiveAndUpcoming } />
 				<Route path="/schedule" exact component={ Schedule } />
 				<Route path="/lounge" exact component={ Lounge } />
-				<Route path="/lounge/profile/:id" exact component={ AttendeeProfile } />
+				<Route path="/lounge/attendee/:id" exact component={ AttendeeProfile } />
+				<Route path="/lounge/speaker/:id" exact component={ SpeakerProfile } />
 				<Route path="/sponsors" exact component={ Sponsors } />
 				<Route path="/sponsors/:id" exact component={ SponsorProfile } />
 			</Switch>

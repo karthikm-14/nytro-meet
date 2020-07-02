@@ -1,6 +1,6 @@
 import React from 'react'
-import Search from '../common/Search'
-import Profiles from './Profiles'
+import Attendees from './Attendees'
+import Speakers from './Speakers'
 
 
 const Lounge = () => {
@@ -21,13 +21,19 @@ const Lounge = () => {
                         <div className="col-12">
                             <ul className="nav nav-line">
                                 <li className="nav-item">
-                                    <a className="nav-link active" id="profiles-tab" data-toggle="tab" href="#profiles" role="tab" aria-controls="profiles" aria-selected="true">Profiles</a>
+                                    <a className="nav-link active" id="attendees-tab" data-toggle="tab" href="#attendees" role="tab" aria-controls="attendees" aria-selected="true">Attendees</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" id="speakers-tab" data-toggle="tab" href="#speakers" role="tab" aria-controls="speakers" aria-selected="true">Speakers</a>
                                 </li>
                             </ul>
 
                             <div className="tab-content pd-l-0 pd-t-35 pd-b-20" id="myTabContent">
-                                <div className="tab-pane fade show active" id="profiles" role="tabpanel" aria-labelledby="profiles-tab">
-                                    <Profiles />
+                                <div className="tab-pane fade show active" id="attendees" role="tabpanel" aria-labelledby="attendees-tab">
+                                    <Attendees />
+                                </div>
+                                <div className="tab-pane fade show" id="speakers" role="tabpanel" aria-labelledby="speakers-tab">
+                                    <Speakers />
                                 </div>
                             </div>
                         </div>

@@ -23,13 +23,6 @@ const StreamingView = (props) => {
                 <VideoPlayer { ...videoJsOptions } /> :
                 'No Streaming available!'
             }
-            <div className="card-body pl-0 pd-t-35">
-                <h6 className="card-title tx-bold tx-24">{ props.event.title }</h6>
-                <p className="tx-14 tx-color-03 tx-metropolis-semi-bold">
-                    { props.event.speakers && props.event.speakers.length ? <SpeakersList speakers={ props.event.speakers } /> : null }
-                </p>
-                <StreamingInfo event={props.event} />
-            </div>
         </Fragment>
     )
 }

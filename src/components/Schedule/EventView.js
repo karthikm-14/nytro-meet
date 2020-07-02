@@ -54,19 +54,21 @@ const EventView = (props) => {
                                                         <i className='icon ion-md-play-circle mg-r-10 tx-16'></i> Watch Again
                                                     </Link>
                                                     :
-                                                    <div className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
-                                                        <i className='icon ion-md-alarm mg-r-10 tx-16'></i>
-                                                        <span>Set Reminder</span>
-                                                    </div>
+                                                    <Link 
+                                                        to={{pathname: `/live-now/${props.stageTitle}`, sessionId: id}}
+                                                        className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold"
+                                                    >
+                                                        <i className='icon ion-md-play-circle mg-r-10 tx-16'></i> More Info
+                                                    </Link>
                                             )
 
                                     }
                                 </li>
-                                <li className="nav-item cursor-pointer">
+                                {/* <li className="nav-item cursor-pointer">
                                     <div className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
                                         <i className="icon ion-md-mail mg-r-10 tx-16"></i> <span>Contact Speaker</span>
                                     </div>
-                                </li>
+                                </li> */}
                                 {/* <li className="nav-item">
                                     <a href="#" className="nav-link d-flex align-items-center tx-gray-500 pd-5 tx-10 tx-semibold">
                                         <i data-feather="copy" className="mg-r-10 ht-15 wd-15"></i> <span>Save Attachments</span>

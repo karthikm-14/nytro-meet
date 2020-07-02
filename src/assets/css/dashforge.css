@@ -13025,15 +13025,13 @@ textarea.parsley-success:focus {
 .content-body {
   position: relative;
   padding: 15px;
-  height: calc(100% - 54px);
   overflow-y: auto; }
   @media (min-width: 576px) {
     .content-body {
       padding: 20px; } }
   @media (min-width: 992px) {
     .content-body {
-      padding: 25px;
-      height: calc(100% - 60px); } }
+      padding: 25px;} }
   .content-body .container {
     margin-bottom: 25px; }
     @media (max-width: 1199.98px) {
