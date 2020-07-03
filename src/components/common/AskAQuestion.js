@@ -71,10 +71,11 @@ const AskAQuestion = (props) => {
 
     const list = !isLoading && questionsList.length && questionsList.map(item => {
         let { id, email, question, questionDate } = item
+        email = email.replace(/(@.*$)/,'').replace(/(\..*$)/,'')
         return  <li key={id} className="bg-gray-800 pd-10 rounded mg-t-20 tx-medium text-center tx-white">
                     <p>{ question }</p>
                     <p className="tx-12">
-                        <span>{ email }</span> 
+                        <span className="text-capitalize">{ email }</span> 
                         <span className="tx-10 tx-gray-300 mg-l-10"><Moment format="LT">{ questionDate }</Moment></span>
                     </p>
                 </li>

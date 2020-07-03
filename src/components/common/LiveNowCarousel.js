@@ -51,9 +51,11 @@ const LiveNowCarousel = (props) => {
                                 (
                                     meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ?
                                     <Link to={{pathname: `/live-now/${stage.title}`, sessionId: id}}>
-                                        <button className="btn btn-primary mg-t-10 tx-11 tx-bold">Watch Now</button>
+                                        <button className="btn btn-primary mg-t-10 tx-11 tx-bold">Watch Again</button>
                                     </Link> :
-                                    null
+                                    <Link to={{pathname: `/live-now/${stage.title}`, sessionId: id}}>
+                                        <button className="btn btn-primary mg-t-10 tx-11 tx-bold">Know More</button>
+                                    </Link>
                                 )
                             }
                         </div>

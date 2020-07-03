@@ -206,7 +206,7 @@ const LiveAndUpcoming = (props) => {
                                                 {
                                                     activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
                                                     activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
-                                                        <video key={activeEvent.id} width="100%" controls className="outline-none">
+                                                        <video key={activeEvent.id} width="100%" controls className="outline-none rounded">
                                                             <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
                                                             Your browser does not support the video tag.
                                                         </video> :

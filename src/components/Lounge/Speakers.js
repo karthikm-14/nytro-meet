@@ -79,14 +79,14 @@ const Speakers = () => {
                         { !isLoading ? items : 'Loading...' }
                     </div>
                 </div>
-                {/* <div className="col-lg-4 col-xl-3 mg-t-40 mg-lg-t-0">
+                <div className="col-lg-4 col-xl-3 mg-t-40 mg-lg-t-0">
                     <SpeakersFilters 
                         filterByCompanyName = { filterByCompanyName }
                         setFilterByCompanyName = { (name) => setFilterByCompanyName(name) }
                         filterByPositionName = { filterByPositionName }
                         setFilterByPositionName = { (name) => setFilterByPositionName(name) }
                     />
-                </div> */}
+                </div>
             </div>
         </Fragment>
     )

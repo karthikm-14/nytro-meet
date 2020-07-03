@@ -15,7 +15,7 @@ const SpeakersFilters = (props) => {
     }, [])
 
     const getSpecializations = (specialization) => {
-        API.get(`user/event/jhi-event-speaker-stats-by-position`)
+        API.get('user/jhi-event-speaker-stats-by-position')
             .then(response => {
                 setSpecializationData(response.data)
                 setIsSpecializationLoading(false)
@@ -24,7 +24,7 @@ const SpeakersFilters = (props) => {
     }
 
     const getCompanies = () => {
-        API.get(`user/event/jhi-event-speaker-stats-by-company?`)
+        API.get('user/jhi-event-speaker-stats-by-company')
             .then(response => {
                 setCompanyData(response.data)
                 setIsCompanyLoading(false)
@@ -36,7 +36,7 @@ const SpeakersFilters = (props) => {
                                     specializationData.map((specialization,i) => {
                                         let active = props.filterByPositionName === specialization.position ? 'active' : null;
                                         return  <div className={`${active} nav-link cursor-pointer`} onClick={ () => props.setFilterByPositionName(specialization.position) } key={i}>
-                                                    <span>{ specialization.position }</span> <span className="badge">{ specialization.totalAttendees }</span>
+                                                    <span>{ specialization.position }</span> <span className="badge">{ specialization.totalSpeakers }</span>
                                                 </div>
                                     }) :
                                     'No Specialization data!'
@@ -45,7 +45,7 @@ const SpeakersFilters = (props) => {
                                     companyData.map((company,i) => {
                                         let active = props.filterByCompanyName === company.company ? 'active' : null;
                                         return  <div className={`${active} nav-link cursor-pointer`} onClick={ () => props.setFilterByCompanyName(company.company) } key={i}>
-                                                    <span>{ company.company }</span> <span className="badge">{ company.totalAttendees }</span>
+                                                    <span>{ company.company }</span> <span className="badge">{ company.totalSpeakers }</span>
                                                 </div>
                                     }) :
                                     'No Company data!'

@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Header from './Header'
 import List from './List'
+import { Menu as HamburgerIcon, X } from 'react-feather';
 
 
 const Menu = (props) => {
@@ -38,8 +39,8 @@ const Menu = (props) => {
                         <img className="logo"  src="/assets/images/horasis-logo.png" />
                     </a>
                     <a href="#" className="aside-menu-link">
-                        <i data-feather="menu"></i>
-                        <i data-feather="x"></i>
+                        <HamburgerIcon />
+                        <X />
                     </a>
                 </div>
                 <div className="aside-body">
