@@ -8,7 +8,9 @@ const Header = (props) => {
         <Fragment>
             <div className="d-flex align-items-center justify-content-start">
                 <a href="" className="avatar avatar-online">
-                    <span className="avatar-initial rounded-circle bg-dark">{ props.userInfo.initial }</span>
+                    <span className="avatar-initial rounded-circle bg-dark overflow-hidden">
+                        { props.userInfo.picture ? <img src={props.userInfo.picture} className="img-fit-cover" alt='icon' /> : props.userInfo.initial }
+                    </span>
                 </a>
                 <div className="aside-alert-link">
                     <span onClick={ props.logout } data-toggle="tooltip" title="Sign out" className="tx-gray-600 mg-l-10 hover-tx-white" type="button">
@@ -21,7 +23,9 @@ const Header = (props) => {
                 <h6 className="tx-semibold mg-b-0">{ props.userInfo.name }</h6>
                 <i data-feather="chevron-down"></i>
                 </a>
-                <p className="tx-color-03 tx-12 mg-b-0">Administrator</p>
+                <p className="tx-color-03 tx-12 mg-b-0">
+                    { props.userInfo.position ? props.userInfo.position : '' }
+                </p>
             </div>
             {/* <div className="collapse" id="loggedinMenu">
                 <ul className="nav nav-aside mg-b-0">

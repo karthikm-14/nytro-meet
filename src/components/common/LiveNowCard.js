@@ -18,7 +18,7 @@ const liveNowCard = (props) => {
                                     <span className="d-inline-block wd-7 ht-7 bg-gray-100 rounded-circle mg-r-5"></span> LIVE
                                 </span>
                                 <h5 className="card-title tx-36 tx-light">{ item['stage-title'] }</h5>
-                                <h6 className={`mb-3 mt-2 text-muted tx-14 tx-semibold align-items-center  ${!item.is_live ? 'd-none' : 'd-flex'}`}>
+                                <h6 className={`mb-3 mt-2 text-white tx-14 tx-semibold align-items-center  ${!item.is_live ? 'd-none' : 'd-flex'}`}>
                                     <i className="fas fa-user mg-r-5"></i> { item['live-audience-count'] } Watching Now
                                 </h6>
                                 <p className="card-text">{ item.description }</p>

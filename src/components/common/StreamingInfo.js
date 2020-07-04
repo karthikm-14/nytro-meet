@@ -24,7 +24,7 @@ const StreamingInfo = (props) => {
                     <p>{ description }</p>
                 </div>
                 <div className="tab-pane fade" id="speakers" role="tabpanel" aria-labelledby="speakers-tab">
-                    { speakers && speakers.length ? <SpeakersList expand={ true } speakers={ speakers } /> : null }
+                    { speakers && speakers.length ? <SpeakersList cardView= { true } speakers={ speakers } /> : null }
                 </div>
                 {/* <div className="tab-pane fade bd bd-2 rounded-5" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
                     <div className="card card-body">

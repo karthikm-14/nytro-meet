@@ -7,6 +7,8 @@ import Search from '../common/Search'
 
 import API from "../../utils/api";
 import { Link, Redirect } from 'react-router-dom'
+import SpeakerCardView from '../common/SpeakerCardView';
+import SponsorCardOne from '../common/SponsorCardOne';
 
 
 const Home = () => {
@@ -17,8 +19,14 @@ const Home = () => {
     const [liveEvents, setLiveEvents] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [header, setHeader] = useState(null)
+    const [featuredSpeakers, setFeaturedSpeakers] = useState([])
+    let [isloadingFeaturedSpeakers, setIsLoadingFeaturedSpeakers] = useState(true)
+    const [featuredSponsors, setFeaturedSponsors] = useState([])
+    let [isloadingFeaturedSponsors, setIsLoadingFeaturedSponsors] = useState(true)
 
     useEffect(() => {
+        getFeaturedSpeakers()
+        getFeaturedSponsors()
         API.get('user/jhi-events?eagerload=true')
             .then(response => {
                 let doneEvents = []
@@ -44,7 +52,7 @@ const Home = () => {
                         doneEvents.push(event)
                         // } else if(todayTimeStamp === eventTimeStamp && eventStartTime >= Date.now()) { 
                     }  
-                    if(todayTimeStamp === eventTimeStamp && today.getTime() < eventStartTime) { // Today's events
+                    if(todayTimeStamp === eventTimeStamp) { // Today's events
                     // event whic are scheduled for today and from current time
                     todaySessions.push(event)
                     // if(!Object.keys(liveEvent).length) {
@@ -69,6 +77,31 @@ const Home = () => {
             })
             .catch(response => console.log(response));
     }, [])
+
+    const getFeaturedSpeakers = () => {
+        API.get(
+            `user/jhi-event-featured-speakers`)
+            .then(response => {
+                const speakers = response.data.map((speaker, i) => {
+                    if(i < 5) {
+                        return <SpeakerCardView key={speaker.id} speaker={ speaker } colXl={3} />
+                    }
+                })
+                setIsLoadingFeaturedSpeakers(false)
+                setFeaturedSpeakers(speakers)
+            })
+            .catch(response => console.log(response));
+    }
+
+    const getFeaturedSponsors = () => {
+        API.get(
+            `user/jhi-event-featured-sponsors`)
+            .then(response => {
+                setIsLoadingFeaturedSponsors(false)
+                setFeaturedSponsors(response.data)
+            })
+            .catch(response => console.log(response));
+    }
 
     return (
         <div className="content ht-100v pd-0">
@@ -131,8 +164,26 @@ const Home = () => {
                     </div>
                     { !isLoading && doneEvents.length ?
                         <div id="slider-content" className="mg-t-50">
-                            <h6 className="mg-b-10 tx-16 tx-normal">In Case You Missed it...</h6>
+                            <h6 className="mg-b-10 tx-18 tx-normal">In Case You Missed it...</h6>
                             <SlickCarousel sessions={ doneEvents } />
+                        </div> :
+                        null
+                    }
+                    { !isloadingFeaturedSpeakers && featuredSpeakers.length ?
+                        <div id="slider-content" className="mg-t-50">
+                            <h6 className="mg-b-10 tx-18 tx-normal">Featured Speakers</h6>
+                            <div className="row row-xs">
+                                { featuredSpeakers }
+                            </div>
+                        </div> :
+                        null
+                    }
+                    { !isloadingFeaturedSponsors && featuredSponsors.length ?
+                        <div id="slider-content" className="mg-t-50">
+                            <h6 className="mg-b-10 tx-18 tx-normal">Featured Sponsors</h6>
+                            <div className="row row-xs">
+                                <SponsorCardOne data={ featuredSponsors } />
+                            </div>
                         </div> :
                         null
                     }

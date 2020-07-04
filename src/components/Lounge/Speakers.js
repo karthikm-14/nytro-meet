@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import SpeakersFilters from './SpeakersFilters'
 import API from '../../utils/api'
 import { Link } from 'react-router-dom'
+import SpeakerCardView from '../common/SpeakerCardView'
 
 
 const Speakers = () => {
@@ -32,26 +33,7 @@ const Speakers = () => {
     }, [filterByCompanyName, filterByPositionName])
 
     const items = !isLoading && data.length ? data.map(attendee => {
-        let { id, profilePicUrl, name, jobPosition, companyName } = {...attendee}
-        return <div key={id} className="col-sm-4 col-md-3 col-lg-4 col-xl-3 d-flex">            
-                    <div className="card card-profile mg-b-10 wd-100p">
-                        {/* <img src="https://via.placeholder.com/500" className="card-img-top" alt="" /> */}
-                        <div className="ht-100 card-img-top bg-gray-100"></div>
-                        <div className="card-body tx-13">
-                            <div>
-                                <Link to={`lounge/speaker/${attendee.id}`}>
-                                    <div className="avatar avatar-lg"><img src={profilePicUrl ? profilePicUrl : "https://via.placeholder.com/350"} className="rounded-circle" alt="" /></div>
-                                </Link>
-                                <Link to={`lounge/speaker/${attendee.id}`} className="tx-white text-center">
-                                    <h4 className="mg-t-10 tx-14">{ name }</h4>
-                                </Link>
-                                <h6 className="tx-11 mg-b-5 tx-gray-500 tx-nowrap">{ jobPosition }</h6>
-                                <small className="tx-12 text-primary mg-b-10 text-center">{ companyName }</small>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>                
-                </div>
+        return <SpeakerCardView key={attendee.id} speaker={ attendee } />
     }) : 'No Speakers'
 
     let filtersList =   <div className="d-flex mg-b-20">

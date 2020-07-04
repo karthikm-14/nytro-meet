@@ -20,7 +20,9 @@ const Menu = (props) => {
                 name: userInfo.name, 
                 email: userInfo.email, 
                 id: userInfo.sub,
-				initial,
+                initial,
+                picture: userInfo.picture,
+                position: userInfo.position,
 				roles: props.keycloak.tokenParsed.realm_access.roles
 			})
 			setIsLoading(false)

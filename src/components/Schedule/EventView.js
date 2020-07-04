@@ -23,14 +23,35 @@ const EventView = (props) => {
                         </div>
                         <div className={`media-body lh-normal ${meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ? 'event-expired': ''}`}>
                             <h5 className="tx-13 lh-2">
-                                { title }
-                                { meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? <span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span> : null }
+                                { 
+                                    meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ?
+                                        title :
+                                        <Link 
+                                            to={{pathname: `/live-now/${props.stageTitle}`, sessionId: id}}
+                                            className="text-white"
+                                        >
+                                            { title }
+                                        </Link> 
+                                }
+                                { 
+                                    meetingStatus === 'started' && streamStatus === 'started' && hlsStreamURL ? 
+                                        <span className="event-live d-inline-block wd-3 ht-3 rounded mg-l-8"></span> : 
+                                        null 
+                                }
                             </h5>
                             <p className="tx-12 mg-b-2 tx-semibold">
                                 <Moment format="LT">{ startDate }</Moment> - <Moment format="LT">{ endDate }</Moment>
                             </p>
                             <small className="tx-10 text-primary tx-semibold">
-                                { speakers && speakers.length ? <SpeakersList speakers={ speakers } /> : null }
+                                { 
+                                    speakers && speakers.length ?  
+                                        (
+                                            meetingStatus === 'finished' && streamStatus === 'finished' && recordingURL ?
+                                                <SpeakersList speakers={ speakers } redirect={ false } /> : 
+                                                <SpeakersList speakers={ speakers } redirect={ true } />
+                                        ) :
+                                        null
+                                }
                             </small>
                         </div>
                         <div className="dropdown dropleft tx-24">
