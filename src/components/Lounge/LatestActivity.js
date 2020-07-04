@@ -19,10 +19,10 @@ const LatestActivity = (props) => {
     }, [props.email])
 
     const list = !isLoading && data.length && data.map(activity => {
-
         let { id, activityTime, activityName, activityType } = {...activity}
-        let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = {...activity.activityBridge}
-        let { title: eventTitle, eventBannerURL, description, speakers } = {...activity.activityBridge.eventR}
+        // let { meetingStatus, streamStatus, hlsStreamURL, recordingURL } = activity.activityBridge
+        let bridgeDetails = activity.activityBridge && activity.activityBridge.eventR
+        let { title: eventTitle, eventBannerURL, description, speakers } = {...bridgeDetails }
         let activityObject = JSON.parse(activity.activityObject)
 
         return  <div className="card mg-t-20" key={id}>
