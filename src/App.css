@@ -124,3 +124,8 @@
     filter: blur(15px);
     -webkit-filter: blur(15px);
 }
+/* post */
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-placeholder);
+    color: #fff;
+}
