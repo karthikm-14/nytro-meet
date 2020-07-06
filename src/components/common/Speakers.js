@@ -31,7 +31,7 @@ const Speakers = (props) => {
     return (
         <div className="col-sm-6 col-md-5 col-lg mg-t-40 mg-sm-t-0">
             <div className="d-flex align-items-center justify-content-between mg-b-20">
-                <h6 className="tx-13 tx-spacing-1 tx-uppercase tx-semibold mg-b-0">Other Speakers <span className="tx-primary ">{ props.company }</span></h6>
+                <h6 className="tx-13 tx-spacing-1 tx-uppercase tx-semibold mg-b-0">Other Speakers</h6>
             </div>
             <ul className="list-unstyled media-list mg-b-15">
                 { !isLoading ? (data.length ? list : 'No Speakers!') : 'Loading...' }
