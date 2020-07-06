@@ -58,14 +58,15 @@ const Home = () => {
                     // if(!Object.keys(liveEvent).length) {
                         //     liveEvent = event;
                         // }
-                    } else if(today.getTime() < eventStartTime) {
+                    } 
+                    if(today.getTime() < eventStartTime) {
                         upComingSessions.push(event)
                     }
                     return event
                 })
                 setTodaySessions(todaySessions)
                 setDoneEvents(doneEvents)
-                setLiveEvents(liveEvents.length ? liveEvents : (todaySessions.length ? [todaySessions[0]] : (upComingSessions.length ? [upComingSessions[0]] : (doneEvents.length ? [doneEvents[0]] : null ))))
+                setLiveEvents(liveEvents.length ? liveEvents : (upComingSessions.length ? [upComingSessions[0]] : (doneEvents.length ? [doneEvents[0]] : null )))
                 if(liveEvents.length) {
                     setHeader('Live Now')
                 } else if (todaySessions.length || upComingSessions.length) {

@@ -7,6 +7,7 @@ import API from '../../utils/api'
 import AskAQuestion from '../common/AskAQuestion'
 import SpeakersList from '../common/SpeakersList'
 import StreamingInfo from '../common/StreamingInfo'
+import { User } from 'react-feather'
 
 
 const LiveAndUpcoming = (props) => {
@@ -17,6 +18,7 @@ const LiveAndUpcoming = (props) => {
     const [upcomingEvents, setUpcomingEvents] = useState(null)
     const [pastEvents, setPastEvents] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [no_of_users, setNo_of_users] = useState(0)
 
     useEffect(() => {
         API.get(`user/jhi-live-events-by-stage?eagerload=true&stage=${props.match.params.stage}`)
@@ -78,7 +80,20 @@ const LiveAndUpcoming = (props) => {
     }, [props.location.sessionId, props.match.params.stage])
     
     useEffect(() => {
-        if(activeEvent && activeEvent.eventBridgeR) {
+        if(activeEvent && activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
+        activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ) {
+            API.get(`user/jhi-event-bridge-status/${activeEvent.eventBridgeR.id}`)
+            .then(response => {
+                let item = response.data.find(item => {
+                    return item.activity_name == 'watched'
+                })
+                setNo_of_users(item.no_of_users)
+            })
+            .catch(response => console.log(response));
+        }
+        if(activeEvent && activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'started' &&
+            activeEvent.eventBridgeR.streamStatus === 'started' && activeEvent.eventBridgeR.hlsStreamURL) {
+
             let date = new Date().toISOString()
             let activityId = null
             API.post('user/jhi-event-bridge-activities', {
@@ -106,6 +121,7 @@ const LiveAndUpcoming = (props) => {
                 .catch(response => console.log(response));
             }
         }
+        
     }, [activeEvent])
 
     
@@ -206,10 +222,15 @@ const LiveAndUpcoming = (props) => {
                                                 {
                                                     activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'finished' &&
                                                     activeEvent.eventBridgeR.streamStatus === 'finished' && activeEvent.eventBridgeR.recordingURL ?
-                                                        <video key={activeEvent.id} width="100%" controls className="outline-none rounded">
-                                                            <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video> :
+                                                        <div className="position-relative">
+                                                            <span className="bg-black-9 d-inline-flex align-items-center p-0 px-2 tx-12 tx-bold mg-b-10 position-absolute z-index-10 mg-10 r-10 tx-white">
+                                                                <User color="white" fill="white" size={14} /> <span className="mg-l-5">{ no_of_users }</span>
+                                                            </span>
+                                                            <video key={activeEvent.id} width="100%" controls className="outline-none rounded">
+                                                                <source src={activeEvent.eventBridgeR.recordingURL} type="video/mp4" />
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        </div> :
                                                         (
                                                             activeEvent.eventBridgeR && activeEvent.eventBridgeR.meetingStatus === 'started' &&
                                                             activeEvent.eventBridgeR.streamStatus === 'started' && activeEvent.eventBridgeR.hlsStreamURL

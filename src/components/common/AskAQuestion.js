@@ -38,6 +38,8 @@ const AskAQuestion = (props) => {
             .then(response => {
                 setQuestionsList(response.data)
                 setIsLoading(false)
+                let objDiv = document.getElementsByClassName('question-scroll-section')[0]
+                objDiv.scrollTop = objDiv.scrollHeight;
             })
             .catch(response => console.log(response));
     }
@@ -94,7 +96,7 @@ const AskAQuestion = (props) => {
                         <span>Ask a question to the speaker.</span>
                         <p>Questions will appear here.</p>
                     </div>
-                    <ScrollArea className="ht-400" >
+                    <ScrollArea className="ht-400 question-scroll-section" >
                         <ul className="list-unstyled pd-l-20 pd-r-20">
                             { 
                                 !isLoading ? 
@@ -118,9 +120,9 @@ const AskAQuestion = (props) => {
                     {
                         !isLoading && props.bridge.meetingStatus === 'started' && props.bridge.streamStatus === 'started' ?
                             <form onSubmit={handleSubmit} className="card-footer mg-t-10">
-                                <label className="mg-0">
+                                <label className="mg-0 wd-100p">
                                     <input
-                                    className="bd-none tx-white outline-none background-none border-0"
+                                    className="bd-none tx-white outline-none background-none border-0 wd-100p"
                                     type="text"
                                     value={ questionAsked }
                                     placeholder='Type Here...'

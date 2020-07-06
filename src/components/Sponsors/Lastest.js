@@ -52,7 +52,7 @@ const Latest = (props) => {
 
     return (
         <div>
-            <h6 className="tx-16 tx-spacing-1 tx-bold mg-b-0">Lastest</h6>
+            <h6 className="tx-16 tx-spacing-1 tx-bold mg-b-0">Latest</h6>
             { !isLoading ? (data.length ? list : <div className="mg-t-50 tx-16">No Activity!</div>) : <div className="mg-t-50">Loading...</div> }
             
         </div>
