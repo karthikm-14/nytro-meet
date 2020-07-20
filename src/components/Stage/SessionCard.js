@@ -31,13 +31,13 @@ const SessionCard = (props) => {
                         START SESSION
                     </button>
                 </a> 
-            } else if (userInfo.roles.includes('panelist') && event.eventBridgeR.bridge.toLocaleLowerCase() === 'zoom' && event.eventBridgeR.bridge.meetingStatus === 'started' && event.eventBridgeR.props.bridge.streamStatus === 'started') {
+            } else if (userInfo.roles.includes('panelist') && event.eventBridgeR.bridge.toLocaleLowerCase() === 'zoom' && event.eventBridgeR.bridge.meetingStatus === 'started') {
                 sessionLink = <a href={`https://meet.nytro.ai/nytro_event/join_meeting.php?user_name=${userInfo.name}&user_email=${userInfo.email}&meeting_token=${event.eventBridgeR.meetingToken}&return_url=${window.location.origin}`} target="_blank" className="pos-absolute b-20 ">
                     <button className="btn btn-sm pd-x-15 btn-primary tx-12 tx-bold">
                         JOIN SESSION
                     </button>
                 </a> 
-            } else if (userInfo.roles.includes('panelist') && event.eventBridgeR.bridge.toLocaleLowerCase() === 'jitsi' && event.eventBridgeR.bridge.meetingStatus === 'started' && event.eventBridgeR.props.bridge.streamStatus === 'started') {
+            } else if (userInfo.roles.includes('panelist') && event.eventBridgeR.bridge.toLocaleLowerCase() === 'jitsi' && event.eventBridgeR.bridge.meetingStatus === 'started') {
                 sessionLink =  <button className="btn btn-sm pd-x-15 btn-primary tx-12 tx-bold" onClick={ (data) => props.getJoinSessionDetails(event, userInfo) }>
                         JOIN SESSION
                     </button>
