@@ -5,7 +5,6 @@ import API from '../../utils/api'
 import SocialLinks from '../common/SocialLinks'
 import Attendees from '../common/Attendees'
 import Latest from './Lastest'
-// import SharePost from '../common/post/SharePost'
 
 
 const SponsorProfile = (props) => {
@@ -69,8 +68,7 @@ const SponsorProfile = (props) => {
                                     { data.additional_info && data.additional_info.social_link ? <SocialLinks links={ data.additional_info.social_link } /> : null }
                                 </div>
                             </div>
-                            <div className="media-body mg-t-40 mg-lg-t-0 pd-lg-x-10">
-                                {/* <SharePost /> */}
+                            <div className="media-body mg-t-40 mg-lg-t-0 pd-lg-x-10">                                
                                 <Latest name={ data.profile.name } id={ data.profile.id } website={ data.profile.website } icon={ data.profile.companyLogo } />
                             </div>
                             {/* Right */}

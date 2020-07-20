@@ -174,7 +174,7 @@ const LiveAndUpcoming = (props) => {
                                 </div> :
                                 (
                                     !isLoading && pastEvents && pastEvents.length ?
-                                        <div className="col-lg-9">
+                                        <div className={`${Object.keys(liveEvent).length ? 'col-lg-9' : 'col-lg-12'}`}>
                                             <div className="row row-xs">
                                                 <div className="col-12">
                                                     <h6 className="mg-b-10 tx-16 tx-normal">Previous Sessions...</h6>
@@ -182,7 +182,7 @@ const LiveAndUpcoming = (props) => {
                                                         <EventCardView  
                                                             events={ pastEvents } 
                                                             setActiveEventHandler = { (id) => setActiveEventHandler(id) }
-                                                            colSm={ 6 } colLg={ 4 }
+                                                            colSm={ 6 } colLg={ `${Object.keys(liveEvent).length ? 4 : 3}` }
                                                         />
                                                     </div>
                                                 </div>

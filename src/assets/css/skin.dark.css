@@ -315,6 +315,9 @@ body {
   .bd-primary {
     border-color: #0168fa; }
   
+  .bd-white {
+    border-color: #fff; }
+    
   .bd-success {
     border-color: #10b759; }
   
