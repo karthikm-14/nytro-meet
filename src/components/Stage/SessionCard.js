@@ -19,7 +19,7 @@ const SessionCard = (props) => {
         })
     }, [props.keycloak])
     
-    const items = !isLoading && props.data.map(event => {
+    const items = !isLoading && props.data.map((event,i) => {
 
         let { title, description, eventBannerURL, startDate } = {...event}
 
@@ -46,11 +46,19 @@ const SessionCard = (props) => {
 
         return <div key={event.id} className="d-flex col-md-4 mg-b-10 wd-100p">
                     <div className="card mg-0-f pd-b-30 wd-100p">
-                        <img src={ eventBannerURL } 
-                            className="card-img-top ht-184 img-fit-cover" 
-                            alt="event title" />
+                        <div className="pos-relative">
+                            <img src={ eventBannerURL } 
+                                className="card-img-top ht-184 img-fit-cover" 
+                                alt="event title" />
+                            <div className={` ${!props.pastSession ? '' : 'd-none'} ${i==0 ? 'bg-danger' : 'bg-gray-900'} tx-semibold tx-13 pos-absolute b-10 l-10 pd-y-5 pd-x-10 rounded tx-white`}>
+                                <span className="d-inline-block wd-8 ht-8 rounded-50 bg-white mg-r-5"></span> Go live&nbsp;
+                                <Moment fromNow>
+                                        {startDate}
+                                </Moment>
+
+                            </div>
+                        </div>
                         <div className="card-body">
-                            <Moment fromNow>{startDate}</Moment>
                             <h5 className="card-title tx-15 tx-semibold">{ title }</h5>
                             <h6 className="card-subtitle mb-3 text-muted tx-13">{ description }</h6>
                             { sessionLink }   

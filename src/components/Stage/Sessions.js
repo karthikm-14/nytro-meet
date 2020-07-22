@@ -7,6 +7,7 @@ import PanelistJoinPage from './PanelistJoinPage'
 
 const Sessions = (props) => {
     const [upcomingSessions, setUpcomingSessions] = useState(null)
+    const [pastSessions, setPastSessions] = useState([])
     let [isLoading, setIsLoading] = useState(true)
     let [isPanelistJoinPage, setIsPanelistJoinPage] = useState(false)
     let [joinSessionDetails, setJoinSessionDetails] = useState(null)
@@ -17,7 +18,8 @@ const Sessions = (props) => {
         }
         API.get('user/jhi-events?eagerload=true')
             .then(response => {
-                let upcomingSessions = []
+                let upcomingSessions = [],
+                    pastSessions = []
                 const today = new Date();
                 response.data.map((event) => {
 
@@ -27,14 +29,17 @@ const Sessions = (props) => {
                     let eventStartTime = new Date(event.startDate).getTime()
                     let eventTimeStamp = Date.UTC(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), 0, 0, 0);
 
-
-                    if(todayTimeStamp === eventTimeStamp) {
+                    if(todayTimeStamp === eventTimeStamp && today.getTime() <= eventStartTime) {
                         upcomingSessions.push(event)
+                    } 
+                    if (todayTimeStamp === eventTimeStamp && today.getTime() > eventStartTime) {
+                        pastSessions.push(event)
                     }
                     return event
                 })
             
                 setUpcomingSessions(upcomingSessions)
+                setPastSessions(pastSessions)
                 setIsLoading(false)
             })
             .catch(response => console.log(response));
@@ -71,7 +76,27 @@ const Sessions = (props) => {
                                     <h6 className="mg-b-15 tx-18 tx-bold">Upcoming Sessions</h6>
                                     { 
                                         !isLoading ? 
-                                            <SessionCard getJoinSessionDetails={ getJoinSessionDetails } keycloak={ props.keycloak } data={ upcomingSessions } /> :
+                                            (
+                                                upcomingSessions.length ?
+                                                <SessionCard getJoinSessionDetails={ getJoinSessionDetails } keycloak={ props.keycloak } data={ upcomingSessions } /> :
+                                                <div className="tx-semibold tx-20">
+                                                    There are no upcoming session for today! 
+                                                </div>
+                                            ) :
+                                            null 
+                                    }
+                                </div>
+                                <div className="col-12 mg-t-50">
+                                    { 
+                                        !isLoading ? 
+                                            (
+                                                pastSessions.length ?
+                                                <div>
+                                                    <h6 className="mg-b-15 tx-18 tx-bold">Past Sessions</h6>
+                                                    <SessionCard pastSession={ true } getJoinSessionDetails={ getJoinSessionDetails } keycloak={ props.keycloak } data={ pastSessions } />
+                                                </div> :
+                                                null
+                                            ) :
                                             null 
                                     }
                                 </div>
