@@ -3,23 +3,10 @@ import Moment from 'react-moment'
 
 const SessionCard = (props) => {
 
-    const [userInfo, setUserInfo] = useState({})
-    let [isLoading, setIsLoading] = useState(true)
+    const [userInfo, setUserInfo] = useState(props.userInfo)
+
     
-    useEffect(() => {
-        
-        props.keycloak.loadUserInfo().then((userInfo) => {
-            setUserInfo({
-                name: userInfo.name, 
-                email: userInfo.email, 
-                id: userInfo.sub,
-				roles: props.keycloak.tokenParsed.realm_access.roles
-			})
-			setIsLoading(false)
-        })
-    }, [props.keycloak])
-    
-    const items = !isLoading && props.data.map((event,i) => {
+    const items = props.data.map((event,i) => {
 
         let { title, description, eventBannerURL, startDate } = {...event}
 
@@ -69,7 +56,7 @@ const SessionCard = (props) => {
 
     return (
         <div className="row row-xs">
-            { !isLoading ? items : 'Loading...' }
+            { items }
         </div>
     )
 }

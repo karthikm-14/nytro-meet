@@ -78,7 +78,7 @@ const Sessions = (props) => {
                                         !isLoading ? 
                                             (
                                                 upcomingSessions.length ?
-                                                <SessionCard getJoinSessionDetails={ getJoinSessionDetails } keycloak={ props.keycloak } data={ upcomingSessions } /> :
+                                                <SessionCard getJoinSessionDetails={ getJoinSessionDetails } userInfo={ props.userInfo } data={ upcomingSessions } /> :
                                                 <div className="tx-semibold tx-20">
                                                     There are no upcoming session for today! 
                                                 </div>
@@ -93,7 +93,7 @@ const Sessions = (props) => {
                                                 pastSessions.length ?
                                                 <div>
                                                     <h6 className="mg-b-15 tx-18 tx-bold">Past Sessions</h6>
-                                                    <SessionCard pastSession={ true } getJoinSessionDetails={ getJoinSessionDetails } keycloak={ props.keycloak } data={ pastSessions } />
+                                                    <SessionCard pastSession={ true } getJoinSessionDetails={ getJoinSessionDetails } userInfo={ props.userInfo } data={ pastSessions } />
                                                 </div> :
                                                 null
                                             ) :

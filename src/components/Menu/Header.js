@@ -9,7 +9,7 @@ const Header = (props) => {
             <div className="d-flex align-items-center justify-content-start">
                 <a href="" className="avatar avatar-online">
                     <span className="avatar-initial rounded-circle bg-dark overflow-hidden">
-                        { props.userInfo.picture ? <img src={props.userInfo.picture} className="img-fit-cover" alt='icon' /> : props.userInfo.initial }
+                        { props.userInfo.picture ? <img src={props.userInfo.picture} className="img-fit-cover" alt='icon' /> : props.initial }
                     </span>
                 </a>
                 <div className="aside-alert-link">
